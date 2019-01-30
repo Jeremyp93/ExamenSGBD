@@ -1,0 +1,1093 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="ExamenSGBDModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="CarteGlobale">
+          <Key>
+            <PropertyRef Name="idCarteGlobale" />
+          </Key>
+          <Property Name="idCarteGlobale" Type="int" Nullable="false" />
+          <Property Name="idTypeRepas" Type="int" Nullable="false" />
+          <Property Name="Element" Type="varchar" MaxLength="255" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CarteGroupe">
+          <Key>
+            <PropertyRef Name="idCarteGroupe" />
+          </Key>
+          <Property Name="idCarteGroupe" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="idGroupe" Type="int" Nullable="false" />
+          <Property Name="idCarte" Type="int" Nullable="false" />
+          <Property Name="PrixMinimum" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CarteRestaurant">
+          <Key>
+            <PropertyRef Name="idCarteRestaurant" />
+          </Key>
+          <Property Name="idCarteRestaurant" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="idRestaurant" Type="int" Nullable="false" />
+          <Property Name="idCarteGroupe" Type="int" Nullable="false" />
+          <Property Name="Prix" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DetailMenus">
+          <Key>
+            <PropertyRef Name="idDetailMenu" />
+          </Key>
+          <Property Name="idDetailMenu" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="idMenu" Type="int" Nullable="false" />
+          <Property Name="idCarteRestaurant" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DetailReservation">
+          <Key>
+            <PropertyRef Name="idDetailReservation" />
+          </Key>
+          <Property Name="idDetailReservation" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="idReservation" Type="int" Nullable="false" />
+          <Property Name="prenom" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="entree" Type="int" Nullable="false" />
+          <Property Name="plat" Type="int" Nullable="false" />
+          <Property Name="dessert" Type="int" Nullable="false" />
+          <Property Name="prixParPersonne" Type="int" Nullable="false" />
+          <Property Name="idMenu" Type="int" />
+        </EntityType>
+        <EntityType Name="Groupes">
+          <Key>
+            <PropertyRef Name="idGroupes" />
+          </Key>
+          <Property Name="idGroupes" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Groupe" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Menus">
+          <Key>
+            <PropertyRef Name="idMenu" />
+          </Key>
+          <Property Name="idMenu" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="idRestaurant" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Reservation">
+          <Key>
+            <PropertyRef Name="idReservation" />
+          </Key>
+          <Property Name="idReservation" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="numeroReservation" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="idTable" Type="int" Nullable="false" />
+          <Property Name="date" Type="datetime" Nullable="false" />
+          <Property Name="prenom" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="nom" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="nbreDePersonnes" Type="int" Nullable="false" />
+          <Property Name="prixTotal" Type="int" />
+          <Property Name="definitif" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Restaurants">
+          <Key>
+            <PropertyRef Name="idRestaurants" />
+          </Key>
+          <Property Name="idRestaurants" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="idGroupe" Type="int" Nullable="false" />
+          <Property Name="Restaurant" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="Ville" Type="varchar" MaxLength="255" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TablesChaise">
+          <Key>
+            <PropertyRef Name="idTables" />
+          </Key>
+          <Property Name="idTables" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="idRestaurant" Type="int" Nullable="false" />
+          <Property Name="nbreDePlaces" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TypeRepas">
+          <Key>
+            <PropertyRef Name="idTypeRepas" />
+          </Key>
+          <Property Name="idTypeRepas" Type="int" Nullable="false" />
+          <Property Name="Type" Type="varchar" MaxLength="255" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_CarteGlobale_TypeRepas">
+          <End Role="TypeRepas" Type="Self.TypeRepas" Multiplicity="1" />
+          <End Role="CarteGlobale" Type="Self.CarteGlobale" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TypeRepas">
+              <PropertyRef Name="idTypeRepas" />
+            </Principal>
+            <Dependent Role="CarteGlobale">
+              <PropertyRef Name="idTypeRepas" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CarteGroupe_CarteGlobale">
+          <End Role="CarteGlobale" Type="Self.CarteGlobale" Multiplicity="1" />
+          <End Role="CarteGroupe" Type="Self.CarteGroupe" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CarteGlobale">
+              <PropertyRef Name="idCarteGlobale" />
+            </Principal>
+            <Dependent Role="CarteGroupe">
+              <PropertyRef Name="idCarte" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CarteGroupe_Groupes">
+          <End Role="Groupes" Type="Self.Groupes" Multiplicity="1" />
+          <End Role="CarteGroupe" Type="Self.CarteGroupe" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Groupes">
+              <PropertyRef Name="idGroupes" />
+            </Principal>
+            <Dependent Role="CarteGroupe">
+              <PropertyRef Name="idGroupe" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CarteRestaurant_CarteGroupe">
+          <End Role="CarteGroupe" Type="Self.CarteGroupe" Multiplicity="1" />
+          <End Role="CarteRestaurant" Type="Self.CarteRestaurant" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CarteGroupe">
+              <PropertyRef Name="idCarteGroupe" />
+            </Principal>
+            <Dependent Role="CarteRestaurant">
+              <PropertyRef Name="idCarteGroupe" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CarteRestaurant_Restaurants">
+          <End Role="Restaurants" Type="Self.Restaurants" Multiplicity="1" />
+          <End Role="CarteRestaurant" Type="Self.CarteRestaurant" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Restaurants">
+              <PropertyRef Name="idRestaurants" />
+            </Principal>
+            <Dependent Role="CarteRestaurant">
+              <PropertyRef Name="idRestaurant" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DetailMenus_CarteRestaurant">
+          <End Role="CarteRestaurant" Type="Self.CarteRestaurant" Multiplicity="1" />
+          <End Role="DetailMenus" Type="Self.DetailMenus" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CarteRestaurant">
+              <PropertyRef Name="idCarteRestaurant" />
+            </Principal>
+            <Dependent Role="DetailMenus">
+              <PropertyRef Name="idCarteRestaurant" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DetailMenus_Menus">
+          <End Role="Menus" Type="Self.Menus" Multiplicity="1" />
+          <End Role="DetailMenus" Type="Self.DetailMenus" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Menus">
+              <PropertyRef Name="idMenu" />
+            </Principal>
+            <Dependent Role="DetailMenus">
+              <PropertyRef Name="idMenu" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DetailReservation_Menus">
+          <End Role="Menus" Type="Self.Menus" Multiplicity="0..1" />
+          <End Role="DetailReservation" Type="Self.DetailReservation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Menus">
+              <PropertyRef Name="idMenu" />
+            </Principal>
+            <Dependent Role="DetailReservation">
+              <PropertyRef Name="idMenu" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DetailReservation_Reservation">
+          <End Role="Reservation" Type="Self.Reservation" Multiplicity="1" />
+          <End Role="DetailReservation" Type="Self.DetailReservation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Reservation">
+              <PropertyRef Name="idReservation" />
+            </Principal>
+            <Dependent Role="DetailReservation">
+              <PropertyRef Name="idReservation" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Menus_Restaurants">
+          <End Role="Restaurants" Type="Self.Restaurants" Multiplicity="1" />
+          <End Role="Menus" Type="Self.Menus" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Restaurants">
+              <PropertyRef Name="idRestaurants" />
+            </Principal>
+            <Dependent Role="Menus">
+              <PropertyRef Name="idRestaurant" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Reservation_TablesChaise">
+          <End Role="TablesChaise" Type="Self.TablesChaise" Multiplicity="1" />
+          <End Role="Reservation" Type="Self.Reservation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TablesChaise">
+              <PropertyRef Name="idTables" />
+            </Principal>
+            <Dependent Role="Reservation">
+              <PropertyRef Name="idTable" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Restaurants_Groupes">
+          <End Role="Groupes" Type="Self.Groupes" Multiplicity="1" />
+          <End Role="Restaurants" Type="Self.Restaurants" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Groupes">
+              <PropertyRef Name="idGroupes" />
+            </Principal>
+            <Dependent Role="Restaurants">
+              <PropertyRef Name="idGroupe" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="ConfirmReservation" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="idReservation" Type="int" Mode="In" />
+          <Parameter Name="prixTotal" Type="int" Mode="In" />
+        </Function>
+        <Function Name="DeleteReservation" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="idReservation" Type="int" Mode="In" />
+        </Function>
+        <Function Name="InsertDetailReservation" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="idReservation" Type="int" Mode="In" />
+          <Parameter Name="prenom" Type="varchar" Mode="In" />
+          <Parameter Name="entree" Type="int" Mode="In" />
+          <Parameter Name="plat" Type="int" Mode="In" />
+          <Parameter Name="dessert" Type="int" Mode="In" />
+          <Parameter Name="prix" Type="int" Mode="In" />
+        </Function>
+        <Function Name="InsertDetailReservationMenu" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="idReservation" Type="int" Mode="In" />
+          <Parameter Name="prenom" Type="varchar" Mode="In" />
+          <Parameter Name="entree" Type="int" Mode="In" />
+          <Parameter Name="plat" Type="int" Mode="In" />
+          <Parameter Name="dessert" Type="int" Mode="In" />
+          <Parameter Name="prix" Type="int" Mode="In" />
+          <Parameter Name="idMenu" Type="int" Mode="In" />
+        </Function>
+        <Function Name="InsertReservation" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="numero" Type="varchar" Mode="In" />
+          <Parameter Name="idTable" Type="int" Mode="In" />
+          <Parameter Name="date" Type="datetime" Mode="In" />
+          <Parameter Name="prenom" Type="varchar" Mode="In" />
+          <Parameter Name="nom" Type="varchar" Mode="In" />
+          <Parameter Name="nbreDePersonnes" Type="int" Mode="In" />
+        </Function>
+        <Function Name="SelectAllRestaurants" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="SelectCarteByRestaurantAndType" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="idRestaurant" Type="int" Mode="In" />
+          <Parameter Name="idType" Type="int" Mode="In" />
+        </Function>
+        <Function Name="SelectCarteMenu" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="idMenu" Type="int" Mode="In" />
+          <Parameter Name="type" Type="int" Mode="In" />
+        </Function>
+        <Function Name="SelectElement" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="idRestaurant" Type="int" Mode="In" />
+        </Function>
+        <Function Name="SelectMenu" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="idDetailReservation" Type="int" Mode="In" />
+        </Function>
+        <Function Name="SelectParticipantsParReservation" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="idReservation" Type="int" Mode="In" />
+        </Function>
+        <Function Name="SelectPrixCarte" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="idCarteRestaurant" Type="int" Mode="In" />
+        </Function>
+        <Function Name="SelectTablesByRestaurant" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="idRestaurant" Type="int" Mode="In" />
+          <Parameter Name="date" Type="datetime" Mode="In" />
+        </Function>
+        <Function Name="SetPrixCarteRestaurant" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="idCarteRestaurant" Type="int" Mode="In" />
+          <Parameter Name="prix" Type="int" Mode="In" />
+        </Function>
+        <Function Name="SumPrixDetailReservation" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="idReservation" Type="int" Mode="In" />
+        </Function>
+        <Function Name="UpdateDetailReservation" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="idDetailReservation" Type="int" Mode="In" />
+          <Parameter Name="prenom" Type="varchar" Mode="In" />
+          <Parameter Name="entree" Type="int" Mode="In" />
+          <Parameter Name="plat" Type="int" Mode="In" />
+          <Parameter Name="dessert" Type="int" Mode="In" />
+          <Parameter Name="prix" Type="int" Mode="In" />
+        </Function>
+        <Function Name="UpdateDetailReservationMenu" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="idDetailReservation" Type="int" Mode="In" />
+          <Parameter Name="prenom" Type="varchar" Mode="In" />
+          <Parameter Name="entree" Type="int" Mode="In" />
+          <Parameter Name="plat" Type="int" Mode="In" />
+          <Parameter Name="dessert" Type="int" Mode="In" />
+          <Parameter Name="prix" Type="int" Mode="In" />
+          <Parameter Name="idMenu" Type="int" Mode="In" />
+        </Function>
+        <EntityContainer Name="ExamenSGBDModelStoreContainer">
+          <EntitySet Name="CarteGlobale" EntityType="Self.CarteGlobale" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CarteGroupe" EntityType="Self.CarteGroupe" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CarteRestaurant" EntityType="Self.CarteRestaurant" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DetailMenus" EntityType="Self.DetailMenus" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DetailReservation" EntityType="Self.DetailReservation" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Groupes" EntityType="Self.Groupes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Menus" EntityType="Self.Menus" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Reservation" EntityType="Self.Reservation" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Restaurants" EntityType="Self.Restaurants" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TablesChaise" EntityType="Self.TablesChaise" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TypeRepas" EntityType="Self.TypeRepas" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_CarteGlobale_TypeRepas" Association="Self.FK_CarteGlobale_TypeRepas">
+            <End Role="TypeRepas" EntitySet="TypeRepas" />
+            <End Role="CarteGlobale" EntitySet="CarteGlobale" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CarteGroupe_CarteGlobale" Association="Self.FK_CarteGroupe_CarteGlobale">
+            <End Role="CarteGlobale" EntitySet="CarteGlobale" />
+            <End Role="CarteGroupe" EntitySet="CarteGroupe" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CarteGroupe_Groupes" Association="Self.FK_CarteGroupe_Groupes">
+            <End Role="Groupes" EntitySet="Groupes" />
+            <End Role="CarteGroupe" EntitySet="CarteGroupe" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CarteRestaurant_CarteGroupe" Association="Self.FK_CarteRestaurant_CarteGroupe">
+            <End Role="CarteGroupe" EntitySet="CarteGroupe" />
+            <End Role="CarteRestaurant" EntitySet="CarteRestaurant" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CarteRestaurant_Restaurants" Association="Self.FK_CarteRestaurant_Restaurants">
+            <End Role="Restaurants" EntitySet="Restaurants" />
+            <End Role="CarteRestaurant" EntitySet="CarteRestaurant" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DetailMenus_CarteRestaurant" Association="Self.FK_DetailMenus_CarteRestaurant">
+            <End Role="CarteRestaurant" EntitySet="CarteRestaurant" />
+            <End Role="DetailMenus" EntitySet="DetailMenus" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DetailMenus_Menus" Association="Self.FK_DetailMenus_Menus">
+            <End Role="Menus" EntitySet="Menus" />
+            <End Role="DetailMenus" EntitySet="DetailMenus" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DetailReservation_Menus" Association="Self.FK_DetailReservation_Menus">
+            <End Role="Menus" EntitySet="Menus" />
+            <End Role="DetailReservation" EntitySet="DetailReservation" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DetailReservation_Reservation" Association="Self.FK_DetailReservation_Reservation">
+            <End Role="Reservation" EntitySet="Reservation" />
+            <End Role="DetailReservation" EntitySet="DetailReservation" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Menus_Restaurants" Association="Self.FK_Menus_Restaurants">
+            <End Role="Restaurants" EntitySet="Restaurants" />
+            <End Role="Menus" EntitySet="Menus" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Reservation_TablesChaise" Association="Self.FK_Reservation_TablesChaise">
+            <End Role="TablesChaise" EntitySet="TablesChaise" />
+            <End Role="Reservation" EntitySet="Reservation" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Restaurants_Groupes" Association="Self.FK_Restaurants_Groupes">
+            <End Role="Groupes" EntitySet="Groupes" />
+            <End Role="Restaurants" EntitySet="Restaurants" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="ExamenSGBDModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="CarteGlobale">
+          <Key>
+            <PropertyRef Name="idCarteGlobale" />
+          </Key>
+          <Property Name="idCarteGlobale" Type="Int32" Nullable="false" />
+          <Property Name="idTypeRepas" Type="Int32" Nullable="false" />
+          <Property Name="Element" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="TypeRepa" Relationship="ExamenSGBDModel.FK_CarteGlobale_TypeRepas" FromRole="CarteGlobale" ToRole="TypeRepa" />
+          <NavigationProperty Name="CarteGroupes" Relationship="ExamenSGBDModel.FK_CarteGroupe_CarteGlobale" FromRole="CarteGlobale" ToRole="CarteGroupe" />
+        </EntityType>
+        <EntityType Name="CarteGroupe">
+          <Key>
+            <PropertyRef Name="idCarteGroupe" />
+          </Key>
+          <Property Name="idCarteGroupe" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="idGroupe" Type="Int32" Nullable="false" />
+          <Property Name="idCarte" Type="Int32" Nullable="false" />
+          <Property Name="PrixMinimum" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="CarteGlobale" Relationship="ExamenSGBDModel.FK_CarteGroupe_CarteGlobale" FromRole="CarteGroupe" ToRole="CarteGlobale" />
+          <NavigationProperty Name="Groupe" Relationship="ExamenSGBDModel.FK_CarteGroupe_Groupes" FromRole="CarteGroupe" ToRole="Groupe" />
+          <NavigationProperty Name="CarteRestaurants" Relationship="ExamenSGBDModel.FK_CarteRestaurant_CarteGroupe" FromRole="CarteGroupe" ToRole="CarteRestaurant" />
+        </EntityType>
+        <EntityType Name="CarteRestaurant">
+          <Key>
+            <PropertyRef Name="idCarteRestaurant" />
+          </Key>
+          <Property Name="idCarteRestaurant" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="idRestaurant" Type="Int32" Nullable="false" />
+          <Property Name="idCarteGroupe" Type="Int32" Nullable="false" />
+          <Property Name="Prix" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="CarteGroupe" Relationship="ExamenSGBDModel.FK_CarteRestaurant_CarteGroupe" FromRole="CarteRestaurant" ToRole="CarteGroupe" />
+          <NavigationProperty Name="Restaurant" Relationship="ExamenSGBDModel.FK_CarteRestaurant_Restaurants" FromRole="CarteRestaurant" ToRole="Restaurant" />
+          <NavigationProperty Name="DetailMenus" Relationship="ExamenSGBDModel.FK_DetailMenus_CarteRestaurant" FromRole="CarteRestaurant" ToRole="DetailMenu" />
+        </EntityType>
+        <EntityType Name="DetailReservation">
+          <Key>
+            <PropertyRef Name="idDetailReservation" />
+          </Key>
+          <Property Name="idDetailReservation" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="idReservation" Type="Int32" Nullable="false" />
+          <Property Name="prenom" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="entree" Type="Int32" Nullable="false" />
+          <Property Name="plat" Type="Int32" Nullable="false" />
+          <Property Name="dessert" Type="Int32" Nullable="false" />
+          <Property Name="prixParPersonne" Type="Int32" Nullable="false" />
+          <Property Name="idMenu" Type="Int32" />
+          <NavigationProperty Name="Reservation" Relationship="ExamenSGBDModel.FK_DetailReservation_Reservation" FromRole="DetailReservation" ToRole="Reservation" />
+          <NavigationProperty Name="DetailMenu" Relationship="ExamenSGBDModel.FK_DetailReservation_DetailMenus" FromRole="DetailReservation" ToRole="DetailMenu" />
+          <NavigationProperty Name="Menu" Relationship="ExamenSGBDModel.FK_DetailReservation_Menus" FromRole="DetailReservation" ToRole="Menu" />
+        </EntityType>
+        <EntityType Name="Groupe">
+          <Key>
+            <PropertyRef Name="idGroupes" />
+          </Key>
+          <Property Name="idGroupes" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Groupe1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="CarteGroupes" Relationship="ExamenSGBDModel.FK_CarteGroupe_Groupes" FromRole="Groupe" ToRole="CarteGroupe" />
+          <NavigationProperty Name="Restaurants" Relationship="ExamenSGBDModel.FK_Restaurants_Groupes" FromRole="Groupe" ToRole="Restaurant" />
+        </EntityType>
+        <EntityType Name="Reservation">
+          <Key>
+            <PropertyRef Name="idReservation" />
+          </Key>
+          <Property Name="idReservation" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="numeroReservation" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="idTable" Type="Int32" Nullable="false" />
+          <Property Name="date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="prenom" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="nom" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="nbreDePersonnes" Type="Int32" Nullable="false" />
+          <Property Name="prixTotal" Type="Int32" />
+          <Property Name="definitif" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="DetailReservations" Relationship="ExamenSGBDModel.FK_DetailReservation_Reservation" FromRole="Reservation" ToRole="DetailReservation" />
+          <NavigationProperty Name="TablesChaise" Relationship="ExamenSGBDModel.FK_Reservation_TablesChaise" FromRole="Reservation" ToRole="TablesChaise" />
+        </EntityType>
+        <EntityType Name="Restaurant">
+          <Key>
+            <PropertyRef Name="idRestaurants" />
+          </Key>
+          <Property Name="idRestaurants" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="idGroupe" Type="Int32" Nullable="false" />
+          <Property Name="Restaurant1" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Ville" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="CarteRestaurants" Relationship="ExamenSGBDModel.FK_CarteRestaurant_Restaurants" FromRole="Restaurant" ToRole="CarteRestaurant" />
+          <NavigationProperty Name="Groupe" Relationship="ExamenSGBDModel.FK_Restaurants_Groupes" FromRole="Restaurant" ToRole="Groupe" />
+          <NavigationProperty Name="Menus" Relationship="ExamenSGBDModel.FK_Menus_Restaurants" FromRole="Restaurant" ToRole="Menu" />
+        </EntityType>
+        <EntityType Name="TablesChaise">
+          <Key>
+            <PropertyRef Name="idTables" />
+          </Key>
+          <Property Name="idTables" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="idRestaurant" Type="Int32" Nullable="false" />
+          <Property Name="nbreDePlaces" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Reservations" Relationship="ExamenSGBDModel.FK_Reservation_TablesChaise" FromRole="TablesChaise" ToRole="Reservation" />
+        </EntityType>
+        <EntityType Name="TypeRepa">
+          <Key>
+            <PropertyRef Name="idTypeRepas" />
+          </Key>
+          <Property Name="idTypeRepas" Type="Int32" Nullable="false" />
+          <Property Name="Type" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="CarteGlobales" Relationship="ExamenSGBDModel.FK_CarteGlobale_TypeRepas" FromRole="TypeRepa" ToRole="CarteGlobale" />
+        </EntityType>
+        <EntityContainer Name="ExamenSGBDEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="CarteGlobales" EntityType="Self.CarteGlobale" />
+          <EntitySet Name="CarteGroupes" EntityType="Self.CarteGroupe" />
+          <EntitySet Name="CarteRestaurants" EntityType="Self.CarteRestaurant" />
+          <EntitySet Name="DetailReservations" EntityType="Self.DetailReservation" />
+          <EntitySet Name="Groupes" EntityType="Self.Groupe" />
+          <EntitySet Name="Reservations" EntityType="Self.Reservation" />
+          <EntitySet Name="Restaurants" EntityType="Self.Restaurant" />
+          <EntitySet Name="TablesChaises" EntityType="Self.TablesChaise" />
+          <EntitySet Name="TypeRepas" EntityType="Self.TypeRepa" />
+          <FunctionImport Name="ConfirmReservation">
+            <Parameter Name="idReservation" Mode="In" Type="Int32" />
+            <Parameter Name="prixTotal" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="DeleteReservation">
+          <Parameter Name="idReservation" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="InsertDetailReservation">
+            <Parameter Name="idReservation" Mode="In" Type="Int32" />
+            <Parameter Name="prenom" Mode="In" Type="String" />
+            <Parameter Name="entree" Mode="In" Type="Int32" />
+            <Parameter Name="plat" Mode="In" Type="Int32" />
+            <Parameter Name="dessert" Mode="In" Type="Int32" />
+            <Parameter Name="prix" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="InsertReservation">
+            <Parameter Name="numero" Mode="In" Type="String" />
+            <Parameter Name="idTable" Mode="In" Type="Int32" />
+            <Parameter Name="date" Mode="In" Type="DateTime" />
+            <Parameter Name="prenom" Mode="In" Type="String" />
+            <Parameter Name="nom" Mode="In" Type="String" />
+            <Parameter Name="nbreDePersonnes" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="SelectAllRestaurants" ReturnType="Collection(ExamenSGBDModel.SelectAllRestaurants_Result)" />
+          <FunctionImport Name="SelectCarteByRestaurantAndType" ReturnType="Collection(ExamenSGBDModel.SelectCarteByRestaurantAndType_Result)">
+            <Parameter Name="idRestaurant" Mode="In" Type="Int32" />
+            <Parameter Name="idType" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="SelectElement" ReturnType="Collection(ExamenSGBDModel.SelectElement_Result)">
+          <Parameter Name="idRestaurant" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="SelectParticipantsParReservation" ReturnType="Collection(ExamenSGBDModel.SelectParticipantsParReservation_Result)">
+          <Parameter Name="idReservation" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="SelectPrixCarte" ReturnType="Collection(Int32)">
+          <Parameter Name="idCarteRestaurant" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="SelectTablesByRestaurant" ReturnType="Collection(ExamenSGBDModel.SelectTablesByRestaurant_Result)">
+            <Parameter Name="idRestaurant" Mode="In" Type="Int32" />
+            <Parameter Name="date" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="SetPrixCarteRestaurant">
+            <Parameter Name="idCarteRestaurant" Mode="In" Type="Int32" />
+            <Parameter Name="prix" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="UpdateDetailReservation">
+            <Parameter Name="idDetailReservation" Mode="In" Type="Int32" />
+            <Parameter Name="prenom" Mode="In" Type="String" />
+            <Parameter Name="entree" Mode="In" Type="Int32" />
+            <Parameter Name="plat" Mode="In" Type="Int32" />
+            <Parameter Name="dessert" Mode="In" Type="Int32" />
+            <Parameter Name="prix" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="SumPrixDetailReservation" ReturnType="Collection(Int32)">
+          <Parameter Name="idReservation" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <EntitySet Name="DetailMenus" EntityType="ExamenSGBDModel.DetailMenu" />
+          <EntitySet Name="Menus" EntityType="ExamenSGBDModel.Menu" />
+          <AssociationSet Name="FK_CarteGlobale_TypeRepas" Association="ExamenSGBDModel.FK_CarteGlobale_TypeRepas">
+            <End Role="TypeRepa" EntitySet="TypeRepas" />
+            <End Role="CarteGlobale" EntitySet="CarteGlobales" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CarteGroupe_CarteGlobale" Association="ExamenSGBDModel.FK_CarteGroupe_CarteGlobale">
+            <End Role="CarteGlobale" EntitySet="CarteGlobales" />
+            <End Role="CarteGroupe" EntitySet="CarteGroupes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CarteGroupe_Groupes" Association="ExamenSGBDModel.FK_CarteGroupe_Groupes">
+            <End Role="Groupe" EntitySet="Groupes" />
+            <End Role="CarteGroupe" EntitySet="CarteGroupes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CarteRestaurant_CarteGroupe" Association="ExamenSGBDModel.FK_CarteRestaurant_CarteGroupe">
+            <End Role="CarteGroupe" EntitySet="CarteGroupes" />
+            <End Role="CarteRestaurant" EntitySet="CarteRestaurants" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CarteRestaurant_Restaurants" Association="ExamenSGBDModel.FK_CarteRestaurant_Restaurants">
+            <End Role="Restaurant" EntitySet="Restaurants" />
+            <End Role="CarteRestaurant" EntitySet="CarteRestaurants" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DetailMenus_Menus" Association="ExamenSGBDModel.FK_DetailMenus_Menus">
+            <End Role="Menu" EntitySet="Menus" />
+            <End Role="DetailMenu" EntitySet="DetailMenus" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DetailReservation_Reservation" Association="ExamenSGBDModel.FK_DetailReservation_Reservation">
+            <End Role="Reservation" EntitySet="Reservations" />
+            <End Role="DetailReservation" EntitySet="DetailReservations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Restaurants_Groupes" Association="ExamenSGBDModel.FK_Restaurants_Groupes">
+            <End Role="Groupe" EntitySet="Groupes" />
+            <End Role="Restaurant" EntitySet="Restaurants" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Menus_Restaurants" Association="ExamenSGBDModel.FK_Menus_Restaurants">
+            <End Role="Restaurant" EntitySet="Restaurants" />
+            <End Role="Menu" EntitySet="Menus" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Reservation_TablesChaise" Association="ExamenSGBDModel.FK_Reservation_TablesChaise">
+            <End Role="TablesChaise" EntitySet="TablesChaises" />
+            <End Role="Reservation" EntitySet="Reservations" />
+          </AssociationSet>
+          <FunctionImport Name="InsertDetailReservationMenu">
+            <Parameter Name="idReservation" Mode="In" Type="Int32" />
+            <Parameter Name="prenom" Mode="In" Type="String" />
+            <Parameter Name="entree" Mode="In" Type="Int32" />
+            <Parameter Name="plat" Mode="In" Type="Int32" />
+            <Parameter Name="dessert" Mode="In" Type="Int32" />
+            <Parameter Name="prix" Mode="In" Type="Int32" />
+            <Parameter Name="idMenu" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <AssociationSet Name="FK_DetailReservation_DetailMenus" Association="ExamenSGBDModel.FK_DetailReservation_DetailMenus">
+            <End Role="DetailMenu" EntitySet="DetailMenus" />
+            <End Role="DetailReservation" EntitySet="DetailReservations" />
+          </AssociationSet>
+          <FunctionImport Name="SelectMenu" ReturnType="Collection(Int32)">
+          <Parameter Name="idDetailReservation" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="SelectDessertMenu" ReturnType="Collection(ExamenSGBDModel.SelectDessertMenu_Result)">
+            <Parameter Name="idMenu" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="SelectEntreeMenu" ReturnType="Collection(ExamenSGBDModel.SelectEntreeMenu_Result)">
+            <Parameter Name="idMenu" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="SelectPlatMenu" ReturnType="Collection(ExamenSGBDModel.SelectPlatMenu_Result)">
+            <Parameter Name="idMenu" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <AssociationSet Name="FK_DetailMenus_CarteRestaurant" Association="ExamenSGBDModel.FK_DetailMenus_CarteRestaurant">
+            <End Role="CarteRestaurant" EntitySet="CarteRestaurants" />
+            <End Role="DetailMenu" EntitySet="DetailMenus" />
+          </AssociationSet>
+          <FunctionImport Name="SelectCarteMenu" ReturnType="Collection(ExamenSGBDModel.SelectCarteMenu_Result)">
+            <Parameter Name="idMenu" Mode="In" Type="Int32" />
+            <Parameter Name="type" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <AssociationSet Name="FK_DetailReservation_Menus" Association="ExamenSGBDModel.FK_DetailReservation_Menus">
+            <End Role="Menu" EntitySet="Menus" />
+            <End Role="DetailReservation" EntitySet="DetailReservations" />
+          </AssociationSet>
+          <FunctionImport Name="UpdateDetailReservationMenu">
+            <Parameter Name="idDetailReservation" Mode="In" Type="Int32" />
+            <Parameter Name="prenom" Mode="In" Type="String" />
+            <Parameter Name="entree" Mode="In" Type="Int32" />
+            <Parameter Name="plat" Mode="In" Type="Int32" />
+            <Parameter Name="dessert" Mode="In" Type="Int32" />
+            <Parameter Name="prix" Mode="In" Type="Int32" />
+            <Parameter Name="idMenu" Mode="In" Type="Int32" />
+          </FunctionImport>
+        </EntityContainer>
+        <ComplexType Name="SelectAllRestaurants_Result">
+          <Property Type="Int32" Name="idRestaurants" Nullable="false" />
+          <Property Type="String" Name="RESTO" Nullable="false" MaxLength="511" />
+        </ComplexType>
+        <ComplexType Name="SelectCarteByRestaurantAndType_Result">
+          <Property Type="Int32" Name="idCarteRestaurant" Nullable="false" />
+          <Property Type="Int32" Name="idRestaurant" Nullable="false" />
+          <Property Type="Int32" Name="idCarteGroupe" Nullable="false" />
+          <Property Type="String" Name="Element" Nullable="false" MaxLength="255" />
+        </ComplexType>
+        <ComplexType Name="SelectElement_Result">
+          <Property Type="Int32" Name="idCarteRestaurant" Nullable="false" />
+          <Property Type="String" Name="Element" Nullable="false" MaxLength="255" />
+        </ComplexType>
+        <ComplexType Name="SelectParticipantsParReservation_Result">
+          <Property Type="Int32" Name="idDetailReservation" Nullable="false" />
+          <Property Type="Int32" Name="idReservation" Nullable="false" />
+          <Property Type="String" Name="prenom" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="entree" Nullable="false" />
+          <Property Type="Int32" Name="plat" Nullable="false" />
+          <Property Type="Int32" Name="dessert" Nullable="false" />
+          <Property Type="Int32" Name="prixParPersonne" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="SelectTablesByRestaurant_Result">
+          <Property Type="Int32" Name="idTables" Nullable="false" />
+          <Property Type="String" Name="TABLECHAISE" Nullable="false" MaxLength="40" />
+          <Property Type="Int32" Name="nbreDePlaces" Nullable="false" />
+        </ComplexType>
+        <EntityType Name="DetailMenu">
+          <Key>
+            <PropertyRef Name="idDetailMenu" />
+          </Key>
+          <Property Name="idDetailMenu" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="idMenu" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Menu" Relationship="ExamenSGBDModel.FK_DetailMenus_Menus" FromRole="DetailMenu" ToRole="Menu" />
+          <NavigationProperty Name="DetailReservations" Relationship="ExamenSGBDModel.FK_DetailReservation_DetailMenus" FromRole="DetailMenu" ToRole="DetailReservation" />
+          <Property Name="idCarteRestaurant" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="CarteRestaurant" Relationship="ExamenSGBDModel.FK_DetailMenus_CarteRestaurant" FromRole="DetailMenu" ToRole="CarteRestaurant" />
+        </EntityType>
+        <EntityType Name="Menu">
+          <Key>
+            <PropertyRef Name="idMenu" />
+          </Key>
+          <Property Name="idMenu" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="idRestaurant" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="DetailMenus" Relationship="ExamenSGBDModel.FK_DetailMenus_Menus" FromRole="Menu" ToRole="DetailMenu" />
+          <NavigationProperty Name="Restaurant" Relationship="ExamenSGBDModel.FK_Menus_Restaurants" FromRole="Menu" ToRole="Restaurant" />
+          <NavigationProperty Name="DetailReservations" Relationship="ExamenSGBDModel.FK_DetailReservation_Menus" FromRole="Menu" ToRole="DetailReservation" />
+        </EntityType>
+        <Association Name="FK_CarteGlobale_TypeRepas">
+          <End Type="ExamenSGBDModel.TypeRepa" Role="TypeRepa" Multiplicity="1" />
+          <End Type="ExamenSGBDModel.CarteGlobale" Role="CarteGlobale" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TypeRepa">
+              <PropertyRef Name="idTypeRepas" />
+            </Principal>
+            <Dependent Role="CarteGlobale">
+              <PropertyRef Name="idTypeRepas" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CarteGroupe_CarteGlobale">
+          <End Type="ExamenSGBDModel.CarteGlobale" Role="CarteGlobale" Multiplicity="1" />
+          <End Type="ExamenSGBDModel.CarteGroupe" Role="CarteGroupe" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CarteGlobale">
+              <PropertyRef Name="idCarteGlobale" />
+            </Principal>
+            <Dependent Role="CarteGroupe">
+              <PropertyRef Name="idCarte" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CarteGroupe_Groupes">
+          <End Type="ExamenSGBDModel.Groupe" Role="Groupe" Multiplicity="1" />
+          <End Type="ExamenSGBDModel.CarteGroupe" Role="CarteGroupe" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Groupe">
+              <PropertyRef Name="idGroupes" />
+            </Principal>
+            <Dependent Role="CarteGroupe">
+              <PropertyRef Name="idGroupe" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CarteRestaurant_CarteGroupe">
+          <End Type="ExamenSGBDModel.CarteGroupe" Role="CarteGroupe" Multiplicity="1" />
+          <End Type="ExamenSGBDModel.CarteRestaurant" Role="CarteRestaurant" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CarteGroupe">
+              <PropertyRef Name="idCarteGroupe" />
+            </Principal>
+            <Dependent Role="CarteRestaurant">
+              <PropertyRef Name="idCarteGroupe" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CarteRestaurant_Restaurants">
+          <End Type="ExamenSGBDModel.Restaurant" Role="Restaurant" Multiplicity="1" />
+          <End Type="ExamenSGBDModel.CarteRestaurant" Role="CarteRestaurant" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Restaurant">
+              <PropertyRef Name="idRestaurants" />
+            </Principal>
+            <Dependent Role="CarteRestaurant">
+              <PropertyRef Name="idRestaurant" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DetailMenus_Menus">
+          <End Type="ExamenSGBDModel.Menu" Role="Menu" Multiplicity="1" />
+          <End Type="ExamenSGBDModel.DetailMenu" Role="DetailMenu" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Menu">
+              <PropertyRef Name="idMenu" />
+            </Principal>
+            <Dependent Role="DetailMenu">
+              <PropertyRef Name="idMenu" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DetailReservation_Reservation">
+          <End Type="ExamenSGBDModel.Reservation" Role="Reservation" Multiplicity="1" />
+          <End Type="ExamenSGBDModel.DetailReservation" Role="DetailReservation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Reservation">
+              <PropertyRef Name="idReservation" />
+            </Principal>
+            <Dependent Role="DetailReservation">
+              <PropertyRef Name="idReservation" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Restaurants_Groupes">
+          <End Type="ExamenSGBDModel.Groupe" Role="Groupe" Multiplicity="1" />
+          <End Type="ExamenSGBDModel.Restaurant" Role="Restaurant" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Groupe">
+              <PropertyRef Name="idGroupes" />
+            </Principal>
+            <Dependent Role="Restaurant">
+              <PropertyRef Name="idGroupe" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Menus_Restaurants">
+          <End Type="ExamenSGBDModel.Restaurant" Role="Restaurant" Multiplicity="1" />
+          <End Type="ExamenSGBDModel.Menu" Role="Menu" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Restaurant">
+              <PropertyRef Name="idRestaurants" />
+            </Principal>
+            <Dependent Role="Menu">
+              <PropertyRef Name="idRestaurant" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Reservation_TablesChaise">
+          <End Type="ExamenSGBDModel.TablesChaise" Role="TablesChaise" Multiplicity="1" />
+          <End Type="ExamenSGBDModel.Reservation" Role="Reservation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TablesChaise">
+              <PropertyRef Name="idTables" />
+            </Principal>
+            <Dependent Role="Reservation">
+              <PropertyRef Name="idTable" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DetailReservation_DetailMenus">
+          <End Type="ExamenSGBDModel.DetailMenu" Role="DetailMenu" Multiplicity="0..1" />
+          <End Type="ExamenSGBDModel.DetailReservation" Role="DetailReservation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DetailMenu">
+              <PropertyRef Name="idDetailMenu" />
+            </Principal>
+            <Dependent Role="DetailReservation">
+              <PropertyRef Name="idMenu" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <ComplexType Name="SelectDessertMenu_Result">
+          <Property Type="Int32" Name="dessert" Nullable="false" />
+          <Property Type="Int32" Name="idRestaurant" Nullable="false" />
+          <Property Type="Int32" Name="idCarteGroupe" Nullable="false" />
+          <Property Type="String" Name="Element" Nullable="false" MaxLength="255" />
+        </ComplexType>
+        <ComplexType Name="SelectEntreeMenu_Result">
+          <Property Type="Int32" Name="entree" Nullable="false" />
+          <Property Type="Int32" Name="idRestaurant" Nullable="false" />
+          <Property Type="Int32" Name="idCarteGroupe" Nullable="false" />
+          <Property Type="String" Name="Element" Nullable="false" MaxLength="255" />
+        </ComplexType>
+        <ComplexType Name="SelectPlatMenu_Result">
+          <Property Type="Int32" Name="plat" Nullable="false" />
+          <Property Type="Int32" Name="idRestaurant" Nullable="false" />
+          <Property Type="Int32" Name="idCarteGroupe" Nullable="false" />
+          <Property Type="String" Name="Element" Nullable="false" MaxLength="255" />
+        </ComplexType>
+        <Association Name="FK_DetailMenus_CarteRestaurant">
+          <End Type="ExamenSGBDModel.CarteRestaurant" Role="CarteRestaurant" Multiplicity="1" />
+          <End Type="ExamenSGBDModel.DetailMenu" Role="DetailMenu" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CarteRestaurant">
+              <PropertyRef Name="idCarteRestaurant" />
+            </Principal>
+            <Dependent Role="DetailMenu">
+              <PropertyRef Name="idCarteRestaurant" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <ComplexType Name="SelectCarteMenu_Result">
+          <Property Type="Int32" Name="idCarteRestaurant" Nullable="false" />
+          <Property Type="Int32" Name="idRestaurant" Nullable="false" />
+          <Property Type="Int32" Name="idCarteGroupe" Nullable="false" />
+          <Property Type="String" Name="Element" Nullable="false" MaxLength="255" />
+        </ComplexType>
+        <Association Name="FK_DetailReservation_Menus">
+          <End Type="ExamenSGBDModel.Menu" Role="Menu" Multiplicity="0..1" />
+          <End Type="ExamenSGBDModel.DetailReservation" Role="DetailReservation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Menu">
+              <PropertyRef Name="idMenu" />
+            </Principal>
+            <Dependent Role="DetailReservation">
+              <PropertyRef Name="idMenu" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ExamenSGBDModelStoreContainer" CdmEntityContainer="ExamenSGBDEntities">
+          <EntitySetMapping Name="CarteGlobales">
+            <EntityTypeMapping TypeName="ExamenSGBDModel.CarteGlobale">
+              <MappingFragment StoreEntitySet="CarteGlobale">
+                <ScalarProperty Name="idCarteGlobale" ColumnName="idCarteGlobale" />
+                <ScalarProperty Name="idTypeRepas" ColumnName="idTypeRepas" />
+                <ScalarProperty Name="Element" ColumnName="Element" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CarteGroupes">
+            <EntityTypeMapping TypeName="ExamenSGBDModel.CarteGroupe">
+              <MappingFragment StoreEntitySet="CarteGroupe">
+                <ScalarProperty Name="idCarteGroupe" ColumnName="idCarteGroupe" />
+                <ScalarProperty Name="idGroupe" ColumnName="idGroupe" />
+                <ScalarProperty Name="idCarte" ColumnName="idCarte" />
+                <ScalarProperty Name="PrixMinimum" ColumnName="PrixMinimum" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CarteRestaurants">
+            <EntityTypeMapping TypeName="ExamenSGBDModel.CarteRestaurant">
+              <MappingFragment StoreEntitySet="CarteRestaurant">
+                <ScalarProperty Name="idCarteRestaurant" ColumnName="idCarteRestaurant" />
+                <ScalarProperty Name="idRestaurant" ColumnName="idRestaurant" />
+                <ScalarProperty Name="idCarteGroupe" ColumnName="idCarteGroupe" />
+                <ScalarProperty Name="Prix" ColumnName="Prix" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DetailReservations">
+            <EntityTypeMapping TypeName="ExamenSGBDModel.DetailReservation">
+              <MappingFragment StoreEntitySet="DetailReservation">
+                <ScalarProperty Name="idMenu" ColumnName="idMenu" />
+                <ScalarProperty Name="idDetailReservation" ColumnName="idDetailReservation" />
+                <ScalarProperty Name="idReservation" ColumnName="idReservation" />
+                <ScalarProperty Name="prenom" ColumnName="prenom" />
+                <ScalarProperty Name="entree" ColumnName="entree" />
+                <ScalarProperty Name="plat" ColumnName="plat" />
+                <ScalarProperty Name="dessert" ColumnName="dessert" />
+                <ScalarProperty Name="prixParPersonne" ColumnName="prixParPersonne" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Groupes">
+            <EntityTypeMapping TypeName="ExamenSGBDModel.Groupe">
+              <MappingFragment StoreEntitySet="Groupes">
+                <ScalarProperty Name="idGroupes" ColumnName="idGroupes" />
+                <ScalarProperty Name="Groupe1" ColumnName="Groupe" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Reservations">
+            <EntityTypeMapping TypeName="ExamenSGBDModel.Reservation">
+              <MappingFragment StoreEntitySet="Reservation">
+                <ScalarProperty Name="idReservation" ColumnName="idReservation" />
+                <ScalarProperty Name="numeroReservation" ColumnName="numeroReservation" />
+                <ScalarProperty Name="idTable" ColumnName="idTable" />
+                <ScalarProperty Name="date" ColumnName="date" />
+                <ScalarProperty Name="prenom" ColumnName="prenom" />
+                <ScalarProperty Name="nom" ColumnName="nom" />
+                <ScalarProperty Name="nbreDePersonnes" ColumnName="nbreDePersonnes" />
+                <ScalarProperty Name="prixTotal" ColumnName="prixTotal" />
+                <ScalarProperty Name="definitif" ColumnName="definitif" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Restaurants">
+            <EntityTypeMapping TypeName="ExamenSGBDModel.Restaurant">
+              <MappingFragment StoreEntitySet="Restaurants">
+                <ScalarProperty Name="idRestaurants" ColumnName="idRestaurants" />
+                <ScalarProperty Name="idGroupe" ColumnName="idGroupe" />
+                <ScalarProperty Name="Restaurant1" ColumnName="Restaurant" />
+                <ScalarProperty Name="Ville" ColumnName="Ville" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TablesChaises">
+            <EntityTypeMapping TypeName="ExamenSGBDModel.TablesChaise">
+              <MappingFragment StoreEntitySet="TablesChaise">
+                <ScalarProperty Name="idTables" ColumnName="idTables" />
+                <ScalarProperty Name="idRestaurant" ColumnName="idRestaurant" />
+                <ScalarProperty Name="nbreDePlaces" ColumnName="nbreDePlaces" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TypeRepas">
+            <EntityTypeMapping TypeName="ExamenSGBDModel.TypeRepa">
+              <MappingFragment StoreEntitySet="TypeRepas">
+                <ScalarProperty Name="idTypeRepas" ColumnName="idTypeRepas" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="ConfirmReservation" FunctionName="ExamenSGBDModel.Store.ConfirmReservation" />
+          <FunctionImportMapping FunctionImportName="DeleteReservation" FunctionName="ExamenSGBDModel.Store.DeleteReservation" />
+          <FunctionImportMapping FunctionImportName="InsertDetailReservation" FunctionName="ExamenSGBDModel.Store.InsertDetailReservation" />
+          <FunctionImportMapping FunctionImportName="InsertReservation" FunctionName="ExamenSGBDModel.Store.InsertReservation" />
+          <FunctionImportMapping FunctionImportName="SelectAllRestaurants" FunctionName="ExamenSGBDModel.Store.SelectAllRestaurants">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ExamenSGBDModel.SelectAllRestaurants_Result">
+                <ScalarProperty Name="idRestaurants" ColumnName="idRestaurants" />
+                <ScalarProperty Name="RESTO" ColumnName="RESTO" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SelectCarteByRestaurantAndType" FunctionName="ExamenSGBDModel.Store.SelectCarteByRestaurantAndType">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ExamenSGBDModel.SelectCarteByRestaurantAndType_Result">
+                <ScalarProperty Name="idCarteRestaurant" ColumnName="idCarteRestaurant" />
+                <ScalarProperty Name="idRestaurant" ColumnName="idRestaurant" />
+                <ScalarProperty Name="idCarteGroupe" ColumnName="idCarteGroupe" />
+                <ScalarProperty Name="Element" ColumnName="Element" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SelectElement" FunctionName="ExamenSGBDModel.Store.SelectElement">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ExamenSGBDModel.SelectElement_Result">
+                <ScalarProperty Name="idCarteRestaurant" ColumnName="idCarteRestaurant" />
+                <ScalarProperty Name="Element" ColumnName="Element" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SelectParticipantsParReservation" FunctionName="ExamenSGBDModel.Store.SelectParticipantsParReservation">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ExamenSGBDModel.SelectParticipantsParReservation_Result">
+                <ScalarProperty Name="idDetailReservation" ColumnName="idDetailReservation" />
+                <ScalarProperty Name="idReservation" ColumnName="idReservation" />
+                <ScalarProperty Name="prenom" ColumnName="prenom" />
+                <ScalarProperty Name="entree" ColumnName="entree" />
+                <ScalarProperty Name="plat" ColumnName="plat" />
+                <ScalarProperty Name="dessert" ColumnName="dessert" />
+                <ScalarProperty Name="prixParPersonne" ColumnName="prixParPersonne" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SelectPrixCarte" FunctionName="ExamenSGBDModel.Store.SelectPrixCarte" />
+          <FunctionImportMapping FunctionImportName="SelectTablesByRestaurant" FunctionName="ExamenSGBDModel.Store.SelectTablesByRestaurant">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ExamenSGBDModel.SelectTablesByRestaurant_Result">
+                <ScalarProperty Name="idTables" ColumnName="idTables" />
+                <ScalarProperty Name="TABLECHAISE" ColumnName="TABLECHAISE" />
+                <ScalarProperty Name="nbreDePlaces" ColumnName="nbreDePlaces" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SetPrixCarteRestaurant" FunctionName="ExamenSGBDModel.Store.SetPrixCarteRestaurant" />
+          <FunctionImportMapping FunctionImportName="UpdateDetailReservation" FunctionName="ExamenSGBDModel.Store.UpdateDetailReservation" />
+          <FunctionImportMapping FunctionImportName="SumPrixDetailReservation" FunctionName="ExamenSGBDModel.Store.SumPrixDetailReservation" />
+          <EntitySetMapping Name="DetailMenus">
+            <EntityTypeMapping TypeName="ExamenSGBDModel.DetailMenu">
+              <MappingFragment StoreEntitySet="DetailMenus">
+                <ScalarProperty Name="idCarteRestaurant" ColumnName="idCarteRestaurant" />
+                <ScalarProperty Name="idMenu" ColumnName="idMenu" />
+                <ScalarProperty Name="idDetailMenu" ColumnName="idDetailMenu" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Menus">
+            <EntityTypeMapping TypeName="ExamenSGBDModel.Menu">
+              <MappingFragment StoreEntitySet="Menus">
+                <ScalarProperty Name="idRestaurant" ColumnName="idRestaurant" />
+                <ScalarProperty Name="idMenu" ColumnName="idMenu" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="InsertDetailReservationMenu" FunctionName="ExamenSGBDModel.Store.InsertDetailReservationMenu" />
+          <FunctionImportMapping FunctionImportName="SelectMenu" FunctionName="ExamenSGBDModel.Store.SelectMenu" />
+          <FunctionImportMapping FunctionImportName="SelectCarteMenu" FunctionName="ExamenSGBDModel.Store.SelectCarteMenu">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ExamenSGBDModel.SelectCarteMenu_Result">
+                <ScalarProperty Name="idCarteRestaurant" ColumnName="idCarteRestaurant" />
+                <ScalarProperty Name="idRestaurant" ColumnName="idRestaurant" />
+                <ScalarProperty Name="idCarteGroupe" ColumnName="idCarteGroupe" />
+                <ScalarProperty Name="Element" ColumnName="Element" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UpdateDetailReservationMenu" FunctionName="ExamenSGBDModel.Store.UpdateDetailReservationMenu" />
+          </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

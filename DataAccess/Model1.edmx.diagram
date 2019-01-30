@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="1ebb90b4b93544e6a93dff7dd8de64ab" Name="Diagram1">
+        <EntityTypeShape EntityType="ExamenSGBDModel.CarteGlobale" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ExamenSGBDModel.CarteGroupe" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ExamenSGBDModel.CarteRestaurant" Width="1.5" PointX="0.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ExamenSGBDModel.DetailReservation" Width="1.5" PointX="2.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ExamenSGBDModel.Groupe" Width="1.5" PointX="4.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ExamenSGBDModel.Reservation" Width="1.5" PointX="4.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ExamenSGBDModel.Restaurant" Width="1.5" PointX="6.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ExamenSGBDModel.TablesChaise" Width="1.5" PointX="6.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ExamenSGBDModel.TypeRepa" Width="1.5" PointX="6.75" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ExamenSGBDModel.DetailMenu" Width="1.5" PointX="11.25" PointY="0.875" />
+        <EntityTypeShape EntityType="ExamenSGBDModel.Menu" Width="1.5" PointX="9" PointY="1" />
+        <AssociationConnector Association="ExamenSGBDModel.FK_CarteGlobale_TypeRepas" />
+        <AssociationConnector Association="ExamenSGBDModel.FK_CarteGroupe_CarteGlobale" />
+        <AssociationConnector Association="ExamenSGBDModel.FK_CarteGroupe_Groupes" />
+        <AssociationConnector Association="ExamenSGBDModel.FK_CarteRestaurant_CarteGroupe" />
+        <AssociationConnector Association="ExamenSGBDModel.FK_CarteRestaurant_Restaurants" />
+        <AssociationConnector Association="ExamenSGBDModel.FK_DetailMenus_Menus" />
+        <AssociationConnector Association="ExamenSGBDModel.FK_DetailReservation_Reservation" />
+        <AssociationConnector Association="ExamenSGBDModel.FK_Restaurants_Groupes" />
+        <AssociationConnector Association="ExamenSGBDModel.FK_Menus_Restaurants" />
+        <AssociationConnector Association="ExamenSGBDModel.FK_Reservation_TablesChaise" />
+        <AssociationConnector Association="ExamenSGBDModel.FK_DetailReservation_DetailMenus" />
+        <AssociationConnector Association="ExamenSGBDModel.FK_DetailMenus_CarteRestaurant" />
+        <AssociationConnector Association="ExamenSGBDModel.FK_DetailReservation_Menus" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
