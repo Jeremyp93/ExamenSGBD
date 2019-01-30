@@ -6,6 +6,7 @@ using System.Linq;
 using System.Security.Policy;
 using System.Text;
 using System.Threading.Tasks;
+using System.Configuration;
 
 namespace DataAccess
 {
@@ -14,11 +15,14 @@ namespace DataAccess
         public static DataSet SelectGroupes()
         {
             DataSet dataToReturn = new DataSet();
+            
+            string myConnectionString = ConfigurationManager.ConnectionStrings["oConn"].ConnectionString;
+
             try
             {
                 using (SqlConnection oConnection = new SqlConnection())
                 {
-                    oConnection.ConnectionString = Utils.oConn;
+                    oConnection.ConnectionString = myConnectionString;
 
                     SqlCommand command = new SqlCommand();
                     command.Connection = oConnection;
@@ -66,7 +70,7 @@ namespace DataAccess
             {
                 using (SqlConnection oConnection = new SqlConnection())
                 {
-                    oConnection.ConnectionString = Utils.oConn;
+                    oConnection.ConnectionString = ConfigurationManager.ConnectionStrings["oConn"].ConnectionString;
 
                     SqlCommand command = new SqlCommand();
                     command.Connection = oConnection;
@@ -116,7 +120,7 @@ namespace DataAccess
             {
                 using (SqlConnection oConnection = new SqlConnection())
                 {
-                    oConnection.ConnectionString = Utils.oConn;
+                    oConnection.ConnectionString = ConfigurationManager.ConnectionStrings["oConn"].ConnectionString;
 
                     SqlCommand command = new SqlCommand();
                     command.Connection = oConnection;
@@ -168,7 +172,7 @@ namespace DataAccess
             {
                 using (SqlConnection oConnection = new SqlConnection())
                 {
-                    oConnection.ConnectionString = Utils.oConn;
+                    oConnection.ConnectionString = ConfigurationManager.ConnectionStrings["oConn"].ConnectionString;
 
                     SqlCommand command = new SqlCommand();
                     command.Connection = oConnection;
@@ -220,7 +224,7 @@ namespace DataAccess
             {
                 using (SqlConnection oConnection = new SqlConnection())
                 {
-                    oConnection.ConnectionString = Utils.oConn;
+                    oConnection.ConnectionString = ConfigurationManager.ConnectionStrings["oConn"].ConnectionString;
 
                     SqlCommand command = new SqlCommand();
                     command.Connection = oConnection;
@@ -271,7 +275,7 @@ namespace DataAccess
             {
                 using (SqlConnection oConnection = new SqlConnection())
                 {
-                    oConnection.ConnectionString = Utils.oConn;
+                    oConnection.ConnectionString = ConfigurationManager.ConnectionStrings["oConn"].ConnectionString;
 
                     SqlCommand command = new SqlCommand();
                     command.Connection = oConnection;
@@ -320,7 +324,7 @@ namespace DataAccess
             {
                 using (SqlConnection oConnection = new SqlConnection())
                 {
-                    oConnection.ConnectionString = Utils.oConn;
+                    oConnection.ConnectionString = ConfigurationManager.ConnectionStrings["oConn"].ConnectionString;
 
                     SqlCommand command = new SqlCommand();
                     command.Connection = oConnection;
@@ -369,7 +373,7 @@ namespace DataAccess
             {
                 using (SqlConnection oConnection = new SqlConnection())
                 {
-                    oConnection.ConnectionString = Utils.oConn;
+                    oConnection.ConnectionString = ConfigurationManager.ConnectionStrings["oConn"].ConnectionString;
 
                     SqlCommand command = new SqlCommand();
                     command.Connection = oConnection;
@@ -414,7 +418,7 @@ namespace DataAccess
             {
                 using (SqlConnection oConnection = new SqlConnection())
                 {
-                    oConnection.ConnectionString = Utils.oConn;
+                    oConnection.ConnectionString = ConfigurationManager.ConnectionStrings["oConn"].ConnectionString;
 
                     SqlCommand command = new SqlCommand();
                     command.Connection = oConnection;
@@ -459,7 +463,7 @@ namespace DataAccess
             {
                 using (SqlConnection oConnection = new SqlConnection())
                 {
-                    oConnection.ConnectionString = Utils.oConn;
+                    oConnection.ConnectionString = ConfigurationManager.ConnectionStrings["oConn"].ConnectionString;
 
                     SqlCommand command = new SqlCommand();
                     command.Connection = oConnection;
@@ -504,7 +508,7 @@ namespace DataAccess
             {
                 using (SqlConnection oConnection = new SqlConnection())
                 {
-                    oConnection.ConnectionString = Utils.oConn;
+                    oConnection.ConnectionString = ConfigurationManager.ConnectionStrings["oConn"].ConnectionString;
 
                     SqlCommand command = new SqlCommand();
                     command.Connection = oConnection;
@@ -550,7 +554,7 @@ namespace DataAccess
             {
                 using (SqlConnection oConnection = new SqlConnection())
                 {
-                    oConnection.ConnectionString = Utils.oConn;
+                    oConnection.ConnectionString = ConfigurationManager.ConnectionStrings["oConn"].ConnectionString;
 
                     SqlCommand command = new SqlCommand();
                     command.Connection = oConnection;
@@ -604,7 +608,7 @@ namespace DataAccess
             {
                 using (SqlConnection oConnection = new SqlConnection())
                 {
-                    oConnection.ConnectionString = Utils.oConn;
+                    oConnection.ConnectionString = ConfigurationManager.ConnectionStrings["oConn"].ConnectionString;
 
                     SqlCommand command = new SqlCommand();
                     command.Connection = oConnection;
@@ -656,7 +660,7 @@ namespace DataAccess
             {
                 using (SqlConnection oConnection = new SqlConnection())
                 {
-                    oConnection.ConnectionString = Utils.oConn;
+                    oConnection.ConnectionString = ConfigurationManager.ConnectionStrings["oConn"].ConnectionString;
 
                     SqlCommand command = new SqlCommand();
                     command.Connection = oConnection;
@@ -705,7 +709,7 @@ namespace DataAccess
             {
                 using (SqlConnection oConnection = new SqlConnection())
                 {
-                    oConnection.ConnectionString = Utils.oConn;
+                    oConnection.ConnectionString = ConfigurationManager.ConnectionStrings["oConn"].ConnectionString;
 
                     SqlCommand command = new SqlCommand();
                     command.Connection = oConnection;
@@ -757,7 +761,7 @@ namespace DataAccess
             {
                 using (SqlConnection oConnection = new SqlConnection())
                 {
-                    oConnection.ConnectionString = Utils.oConn;
+                    oConnection.ConnectionString = ConfigurationManager.ConnectionStrings["oConn"].ConnectionString;
 
                     SqlCommand command = new SqlCommand();
                     command.Connection = oConnection;
@@ -811,7 +815,7 @@ namespace DataAccess
             {
                 using (SqlConnection oConnection = new SqlConnection())
                 {
-                    oConnection.ConnectionString = Utils.oConn;
+                    oConnection.ConnectionString = ConfigurationManager.ConnectionStrings["oConn"].ConnectionString;
 
                     SqlCommand command = new SqlCommand();
                     command.Connection = oConnection;
@@ -861,7 +865,7 @@ namespace DataAccess
             {
                 using (SqlConnection oConnection = new SqlConnection())
                 {
-                    oConnection.ConnectionString = Utils.oConn;
+                    oConnection.ConnectionString = ConfigurationManager.ConnectionStrings["oConn"].ConnectionString;
 
                     SqlCommand command = new SqlCommand();
                     command.Connection = oConnection;
@@ -914,7 +918,7 @@ namespace DataAccess
             {
                 using (SqlConnection oConnection = new SqlConnection())
                 {
-                    oConnection.ConnectionString = Utils.oConn;
+                    oConnection.ConnectionString = ConfigurationManager.ConnectionStrings["oConn"].ConnectionString;
 
                     SqlCommand command = new SqlCommand();
                     command.Connection = oConnection;
@@ -964,7 +968,7 @@ namespace DataAccess
             {
                 using (SqlConnection oConnection = new SqlConnection())
                 {
-                    oConnection.ConnectionString = Utils.oConn;
+                    oConnection.ConnectionString = ConfigurationManager.ConnectionStrings["oConn"].ConnectionString;
 
                     SqlCommand command = new SqlCommand();
                     command.Connection = oConnection;
@@ -1016,7 +1020,7 @@ namespace DataAccess
             {
                 using (SqlConnection oConnection = new SqlConnection())
                 {
-                    oConnection.ConnectionString = Utils.oConn;
+                    oConnection.ConnectionString = ConfigurationManager.ConnectionStrings["oConn"].ConnectionString;
 
                     SqlCommand command = new SqlCommand();
                     command.Connection = oConnection;
@@ -1069,7 +1073,7 @@ namespace DataAccess
             {
                 using (SqlConnection oConnection = new SqlConnection())
                 {
-                    oConnection.ConnectionString = Utils.oConn;
+                    oConnection.ConnectionString = ConfigurationManager.ConnectionStrings["oConn"].ConnectionString;
 
                     SqlCommand command = new SqlCommand();
                     command.Connection = oConnection;
