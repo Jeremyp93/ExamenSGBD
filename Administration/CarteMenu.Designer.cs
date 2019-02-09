@@ -52,6 +52,8 @@
             this.listBoxEntree = new System.Windows.Forms.ListBox();
             this.comboBoxMenu = new System.Windows.Forms.ComboBox();
             this.buttonSupprimerMenu = new System.Windows.Forms.Button();
+            this.label4 = new System.Windows.Forms.Label();
+            this.labelPrix = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // button1
@@ -100,7 +102,7 @@
             this.label9.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.label9.Location = new System.Drawing.Point(35, 428);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(1051, 10);
+            this.label9.Size = new System.Drawing.Size(741, 10);
             this.label9.TabIndex = 66;
             // 
             // label8
@@ -109,7 +111,7 @@
             this.label8.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.label8.Location = new System.Drawing.Point(32, 254);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(1051, 10);
+            this.label8.Size = new System.Drawing.Size(744, 10);
             this.label8.TabIndex = 65;
             // 
             // label3
@@ -220,6 +222,7 @@
             this.listBoxDessertChoisi.Name = "listBoxDessertChoisi";
             this.listBoxDessertChoisi.Size = new System.Drawing.Size(174, 134);
             this.listBoxDessertChoisi.TabIndex = 54;
+            this.listBoxDessertChoisi.SelectedIndexChanged += new System.EventHandler(this.listBoxDessertChoisi_SelectedIndexChanged);
             // 
             // listBoxDessert
             // 
@@ -236,6 +239,7 @@
             this.listBoxPlatChoisi.Name = "listBoxPlatChoisi";
             this.listBoxPlatChoisi.Size = new System.Drawing.Size(174, 134);
             this.listBoxPlatChoisi.TabIndex = 52;
+            this.listBoxPlatChoisi.SelectedIndexChanged += new System.EventHandler(this.listBoxPlatChoisi_SelectedIndexChanged);
             // 
             // listBoxPlat
             // 
@@ -252,6 +256,7 @@
             this.listBoxEntreeChoisie.Name = "listBoxEntreeChoisie";
             this.listBoxEntreeChoisie.Size = new System.Drawing.Size(174, 134);
             this.listBoxEntreeChoisie.TabIndex = 50;
+            this.listBoxEntreeChoisie.SelectedIndexChanged += new System.EventHandler(this.listBoxEntreeChoisie_SelectedIndexChanged);
             // 
             // listBoxEntree
             // 
@@ -283,11 +288,32 @@
             this.buttonSupprimerMenu.UseVisualStyleBackColor = true;
             this.buttonSupprimerMenu.Click += new System.EventHandler(this.buttonSupprimerMenu_Click);
             // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Arial", 48F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Location = new System.Drawing.Point(853, 206);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(175, 75);
+            this.label4.TabIndex = 73;
+            this.label4.Text = "Prix:";
+            // 
+            // labelPrix
+            // 
+            this.labelPrix.AutoSize = true;
+            this.labelPrix.Font = new System.Drawing.Font("Arial", 48F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelPrix.Location = new System.Drawing.Point(873, 300);
+            this.labelPrix.Name = "labelPrix";
+            this.labelPrix.Size = new System.Drawing.Size(0, 75);
+            this.labelPrix.TabIndex = 74;
+            // 
             // CarteMenu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1096, 657);
+            this.Controls.Add(this.labelPrix);
+            this.Controls.Add(this.label4);
             this.Controls.Add(this.buttonSupprimerMenu);
             this.Controls.Add(this.comboBoxMenu);
             this.Controls.Add(this.button1);
@@ -346,5 +372,7 @@
         private System.Windows.Forms.ListBox listBoxEntree;
         private System.Windows.Forms.ComboBox comboBoxMenu;
         private System.Windows.Forms.Button buttonSupprimerMenu;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label labelPrix;
     }
 }

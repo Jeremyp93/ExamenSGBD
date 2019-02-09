@@ -342,5 +342,14 @@ namespace DataAccess
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("UpdateDetailReservationMenu", idDetailReservationParameter, prenomParameter, entreeParameter, platParameter, dessertParameter, prixParameter, idMenuParameter);
         }
+    
+        public virtual ObjectResult<Nullable<int>> SelectPrixGroupe(Nullable<int> idCarteRestaurant)
+        {
+            var idCarteRestaurantParameter = idCarteRestaurant.HasValue ?
+                new ObjectParameter("idCarteRestaurant", idCarteRestaurant) :
+                new ObjectParameter("idCarteRestaurant", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("SelectPrixGroupe", idCarteRestaurantParameter);
+        }
     }
 }

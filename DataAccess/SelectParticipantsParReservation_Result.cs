@@ -21,6 +21,6 @@ namespace DataAccess
         public int dessert { get; set; }
         public int prixParPersonne { get; set; }
 
-        public int idMenu { get; set; }
+        public int? idMenu { get; set; }
     }
 }

@@ -199,7 +199,7 @@ namespace DataAccess
             }
             catch (Exception)
             {
-                throw;
+                throw new Exception("Le nom existe déjà !");
             }
         }
 
@@ -242,7 +242,7 @@ namespace DataAccess
             }
             catch (Exception)
             {
-                throw;
+                throw new Exception("Le nom existe deja !");
             }
         }
 
@@ -355,6 +355,19 @@ namespace DataAccess
             catch (Exception)
             {
                 throw;
+            }
+        }
+
+        public static int SelectPrixGroupe(int idCarteRestaurant)
+        {
+            try
+            {
+                int valueToReturn = (Int32)oExamenSgbdEntities.SelectPrixGroupe(idCarteRestaurant).FirstOrDefault();
+                return valueToReturn;
+            }
+            catch (Exception e)
+            {
+                throw e;
             }
         }
     }

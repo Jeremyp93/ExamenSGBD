@@ -685,5 +685,18 @@ namespace BusinessLayer
                 throw;
             }
         }
+
+        public static int GetPrixGroupe(int idCarteRestaurant)
+        {
+            try
+            {
+                int valueToReturn = DataLayerLinq.SelectPrixGroupe(idCarteRestaurant);
+                return valueToReturn;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
     }
 }

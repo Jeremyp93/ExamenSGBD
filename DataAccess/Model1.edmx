@@ -301,6 +301,9 @@
         <Function Name="SelectPrixCarte" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="idCarteRestaurant" Type="int" Mode="In" />
         </Function>
+        <Function Name="SelectPrixGroupe" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="idCarteRestaurant" Type="int" Mode="In" />
+        </Function>
         <Function Name="SelectTablesByRestaurant" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="idRestaurant" Type="int" Mode="In" />
           <Parameter Name="date" Type="datetime" Mode="In" />
@@ -651,6 +654,9 @@
             <Parameter Name="dessert" Mode="In" Type="Int32" />
             <Parameter Name="prix" Mode="In" Type="Int32" />
             <Parameter Name="idMenu" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="SelectPrixGroupe" ReturnType="Collection(Int32)">
+            <Parameter Name="idCarteRestaurant" Mode="In" Type="Int32" />
           </FunctionImport>
         </EntityContainer>
         <ComplexType Name="SelectAllRestaurants_Result">
@@ -1067,6 +1073,7 @@
             </ResultMapping>
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="UpdateDetailReservationMenu" FunctionName="ExamenSGBDModel.Store.UpdateDetailReservationMenu" />
+          <FunctionImportMapping FunctionImportName="SelectPrixGroupe" FunctionName="ExamenSGBDModel.Store.SelectPrixGroupe" />
           </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

@@ -116,10 +116,7 @@ namespace Reservation
                 helper.idEntree = selectedEntree.idCarteRestaurant;
                 helper.idPlat = selectedPlat.idCarteRestaurant;
                 helper.idDessert = selectedDessert.idCarteRestaurant;
-                helper.prixParPersonnes = Convert.ToInt32((Manage.GetCarteRestaurant()
-                    .FirstOrDefault(x => x.idCarteRestaurant == selectedEntree.idCarteRestaurant).Prix + Manage.GetCarteRestaurant()
-                                              .FirstOrDefault(x => x.idCarteRestaurant == selectedPlat.idCarteRestaurant).Prix + Manage.GetCarteRestaurant()
-                                              .FirstOrDefault(x => x.idCarteRestaurant == selectedDessert.idCarteRestaurant).Prix)*0.9);
+                helper.prixParPersonnes = Convert.ToInt32((Manage.GetPrixGroupe(selectedEntree.idCarteRestaurant) + Manage.GetPrixGroupe(selectedPlat.idCarteRestaurant) + Manage.GetPrixGroupe(selectedDessert.idCarteRestaurant))*0.9);
                 if (Manage.GetDetailReservation().Exists(x => x.idDetailReservation == helper.idDetail))
                 {
                     Manage.ModifierDetailReservationMenu(helper.idDetail, textBoxPrenom.Text, helper.idEntree, helper.idPlat, helper.idDessert, helper.prixParPersonnes, selectedMenu.idMenu);

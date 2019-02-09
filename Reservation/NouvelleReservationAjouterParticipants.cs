@@ -33,8 +33,8 @@ namespace Reservation
         {
             try
             {
-                //if (Manage.GetMenus().Where(x => x.idRestaurant == GetNumeroRestaurant()).ToList().Count == 0)
-                //    buttonMenu.Enabled = false;
+                if (Manage.GetMenus().Where(x => x.idRestaurant == GetNumeroRestaurant()).ToList().Count == 0)
+                    buttonMenu.Enabled = false;
                 if (helper.modifier || helper.prenom != "") // Si on a appuyé sur modifier on recupère le nom de la reservation
                     textBoxPrenom.Text = helper.prenomParticipant;
                 comboBoxEntree.DataSource = Manage.GetCarteByRestaurantAndType(GetNumeroRestaurant(), 1); // Recuperer les entrees du restaurant
