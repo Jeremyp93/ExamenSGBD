@@ -10,365 +10,233 @@ namespace DataAccess
 {
     public class DataLayerLinq
     {
-        static ExamenSGBDEntities oExamenSgbdEntities = new ExamenSGBDEntities();
+        //static ExamenSGBDEntities oExamenSgbdEntities = new ExamenSGBDEntities();
 
         public static int SelectNbreDeChaise(int idTables)
         {
             int nbreDePlace;
-            try
+            using (ExamenSGBDEntities oExamenSgbdEntities = new ExamenSGBDEntities())
             {
                 nbreDePlace = oExamenSgbdEntities.TablesChaises.FirstOrDefault(x =>
                     x.idTables == idTables).nbreDePlaces;
-                return nbreDePlace;
             }
-            catch (Exception e)
-            {
-                throw e;
-            }
+            return nbreDePlace;
         }
 
         public static int? SelectIdMenu(int idDetailReservation)
         {
             int? idMenu = null;
-            try
+            using (ExamenSGBDEntities oExamenSgbdEntities = new ExamenSGBDEntities())
             {
                 if (oExamenSgbdEntities.SelectMenu(idDetailReservation).FirstOrDefault() != null)
-                    idMenu = (Int32)oExamenSgbdEntities.SelectMenu(idDetailReservation).FirstOrDefault();
+                    idMenu = (Int32) oExamenSgbdEntities.SelectMenu(idDetailReservation).FirstOrDefault();
+            }
 
-                return idMenu;
-            }
-            catch (Exception e)
-            {
-                throw e;
-            }
+            return idMenu;
         }
 
         public static List<Reservation> SelectListReservation()
         {
-            try
+            List<Reservation> lstReservation = new List<Reservation>();
+            using (ExamenSGBDEntities oExamenSgbdEntities = new ExamenSGBDEntities())
             {
-                List<Reservation> lstReservation = new List<Reservation>();
                 lstReservation = oExamenSgbdEntities.Reservations.ToList();
-                return lstReservation;
             }
-            catch (Exception e)
-            {
-                throw e;
-            }
+
+            return lstReservation;
         }
 
         public static void InsertReservation(string numero, int idTables, DateTime date, string prenom, string nom,
             int nombre)
         {
-            try
+            using (ExamenSGBDEntities oExamenSgbdEntities = new ExamenSGBDEntities())
             {
                 oExamenSgbdEntities.InsertReservation(numero, idTables, date, prenom, nom, nombre);
-            }
-            catch (Exception)
-            {
-                throw;
             }
         }
 
         public static List<SelectAllRestaurants_Result> SelectAllRestaurants()
         {
-            try
+            List<SelectAllRestaurants_Result> valueToReturn;
+            using (ExamenSGBDEntities oExamenSgbdEntities = new ExamenSGBDEntities())
             {
-                var valueToReturn = oExamenSgbdEntities.SelectAllRestaurants().ToList();
-                return valueToReturn;
+                valueToReturn = oExamenSgbdEntities.SelectAllRestaurants().ToList();
             }
-            catch (Exception)
-            {
-                throw;
-            }
+
+            return valueToReturn;
         }
 
         public static List<SelectTablesByRestaurant_Result> SelectTablesByRestaurant(int idRestaurant, DateTime date)
         {
-            try
+            List<SelectTablesByRestaurant_Result> valueToReturn;
+            using (ExamenSGBDEntities oExamenSgbdEntities = new ExamenSGBDEntities())
             {
-                var valueToReturn = oExamenSgbdEntities.SelectTablesByRestaurant(idRestaurant, date).ToList();
-                return valueToReturn;
-            }
-            catch (Exception)
-            {
-                throw;
+                valueToReturn = oExamenSgbdEntities.SelectTablesByRestaurant(idRestaurant, date).ToList();
             }
 
+            return valueToReturn;
         }
 
         public static List<TablesChaise> SelectTablesChaise()
         {
-            try
+            List<TablesChaise> valueToReturn;
+            using (ExamenSGBDEntities oExamenSgbdEntities = new ExamenSGBDEntities())
             {
-                var valueToReturn = oExamenSgbdEntities.TablesChaises.ToList();
-                return valueToReturn;
+                valueToReturn = oExamenSgbdEntities.TablesChaises.ToList();
             }
-            catch (Exception)
-            {
-                throw;
-            }
+
+            return valueToReturn;
         }
 
         public static List<SelectParticipantsParReservation_Result> SelectParticipantsParReservation(int idReservation)
         {
-            try
+            List<SelectParticipantsParReservation_Result> valueToReturn;
+            using (ExamenSGBDEntities oExamenSgbdEntities = new ExamenSGBDEntities())
             {
-                var valueToReturn = oExamenSgbdEntities.SelectParticipantsParReservation(idReservation).ToList();
-                return valueToReturn;
+                valueToReturn = oExamenSgbdEntities.SelectParticipantsParReservation(idReservation).ToList();
             }
-            catch (Exception)
-            {
-                throw;
-            }
+
+            return valueToReturn;
         }
 
         public static List<SelectCarteByRestaurantAndType_Result> SelectCarteByRestaurantAndType(int idRestaurant, int type)
         {
-            try
+            List<SelectCarteByRestaurantAndType_Result> valueToReturn;
+            using (ExamenSGBDEntities oExamenSgbdEntities = new ExamenSGBDEntities())
             {
-                var valueToReturn = oExamenSgbdEntities.SelectCarteByRestaurantAndType(idRestaurant, type).ToList();
-                return valueToReturn;
+                valueToReturn = oExamenSgbdEntities.SelectCarteByRestaurantAndType(idRestaurant, type).ToList();
             }
-            catch (Exception)
-            {
-                throw;
-            }
+
+            return valueToReturn;
         }
 
         public static List<SelectCarteMenu_Result> SelectCarteMenu(int idMenu, int type)
         {
-            try
+            List<SelectCarteMenu_Result> valueToReturn;
+            using (ExamenSGBDEntities oExamenSgbdEntities = new ExamenSGBDEntities())
             {
-                var valueToReturn = oExamenSgbdEntities.SelectCarteMenu(idMenu, type).ToList();
-                return valueToReturn;
+                valueToReturn = oExamenSgbdEntities.SelectCarteMenu(idMenu, type).ToList();
             }
-            catch (Exception)
-            {
-                throw;
-            }
+
+            return valueToReturn;
         }
 
         public static void UpdateReservation(int idReservation, int prixTotal)
         {
-            try
+            using (ExamenSGBDEntities oExamenSgbdEntities = new ExamenSGBDEntities())
             {
                 oExamenSgbdEntities.ConfirmReservation(idReservation, prixTotal);
-            }
-            catch (Exception)
-            {
-                throw;
             }
         }
 
         public static void DeleteReservation(int idReservation)
         {
-            try
+            using (ExamenSGBDEntities oExamenSgbdEntities = new ExamenSGBDEntities())
             {
                 oExamenSgbdEntities.DeleteReservation(idReservation);
-            }
-            catch (Exception)
-            {
-                throw;
             }
         }
 
         public static void InsertDetailReservation(int idReservation, string prenom, int entree, int plat, int dessert, int prix)
         {
-            try
+            using (ExamenSGBDEntities oExamenSgbdEntities = new ExamenSGBDEntities())
             {
                 oExamenSgbdEntities.InsertDetailReservation(idReservation, prenom, entree, plat, dessert, prix);
-            }
-            catch (SqlException sqlex)
-            {
-                switch (sqlex.Number)
-                {
-                    case 4060:
-                        throw new Exception(sqlex.Number + "Mauvaise DB");
-                        break;
-                    case 18456:
-                        throw new Exception(sqlex.Number + "Mauvais user");
-                        break;
-                    case 515:
-                        throw new Exception(sqlex.Number + " : Le prix ne peut être null");
-                        break;
-                    default:
-                        throw new Exception(sqlex.Number + " : " + sqlex.Message);
-                        break;
-                }
-            }
-            catch (Exception)
-            {
-                throw new Exception("Le nom existe déjà !");
             }
         }
 
         public static List<DetailReservation> SelectDetailReservation()
         {
-            try
+            List<DetailReservation> valueToReturn;
+            using (ExamenSGBDEntities oExamenSgbdEntities = new ExamenSGBDEntities())
             {
-                var valueToReturn = oExamenSgbdEntities.DetailReservations.ToList();
-                return valueToReturn;
+                valueToReturn = oExamenSgbdEntities.DetailReservations.ToList();
             }
-            catch (Exception)
-            {
-                throw;
-            }
+
+            return valueToReturn;
         }
 
         public static void UpdateDetailReservation(int idReservation, string prenom, int entree, int plat, int dessert, int prix)
         {
-            try
+            using (ExamenSGBDEntities oExamenSgbdEntities = new ExamenSGBDEntities())
             {
                 oExamenSgbdEntities.UpdateDetailReservation(idReservation, prenom, entree, plat, dessert, prix);
-            }
-            catch (SqlException sqlex)
-            {
-                switch (sqlex.Number)
-                {
-                    case 4060:
-                        throw new Exception(sqlex.Number + "Mauvaise DB");
-                        break;
-                    case 18456:
-                        throw new Exception(sqlex.Number + "Mauvais user");
-                        break;
-                    case 515:
-                        throw new Exception(sqlex.Number + " : Le prix ne peut être null");
-                        break;
-                    default:
-                        throw new Exception(sqlex.Number + " : " + sqlex.Message);
-                        break;
-                }
-            }
-            catch (Exception)
-            {
-                throw new Exception("Le nom existe deja !");
             }
         }
 
         public static void UpdateDetailReservationMenu(int idReservation, string prenom, int entree, int plat, int dessert, int prix, int idMenu)
         {
-            try
+            using (ExamenSGBDEntities oExamenSgbdEntities = new ExamenSGBDEntities())
             {
-                oExamenSgbdEntities.UpdateDetailReservationMenu(idReservation, prenom, entree, plat, dessert, prix, idMenu);
-            }
-            catch (SqlException sqlex)
-            {
-                switch (sqlex.Number)
-                {
-                    case 4060:
-                        throw new Exception(sqlex.Number + "Mauvaise DB");
-                        break;
-                    case 18456:
-                        throw new Exception(sqlex.Number + "Mauvais user");
-                        break;
-                    case 515:
-                        throw new Exception(sqlex.Number + " : Le prix ne peut être null");
-                        break;
-                    default:
-                        throw new Exception(sqlex.Number + " : " + sqlex.Message);
-                        break;
-                }
-            }
-            catch (Exception)
-            {
-                throw;
+                oExamenSgbdEntities.UpdateDetailReservationMenu(idReservation, prenom, entree, plat, dessert, prix,
+                    idMenu);
             }
         }
 
         public static List<CarteRestaurant> SelectCarteRestaurant()
         {
-            try
+            List<CarteRestaurant> valueToReturn;
+            using (ExamenSGBDEntities oExamenSgbdEntities = new ExamenSGBDEntities())
             {
-                var valueToReturn = oExamenSgbdEntities.CarteRestaurants.ToList();
-                return valueToReturn;
+                valueToReturn = oExamenSgbdEntities.CarteRestaurants.ToList();
             }
-            catch (Exception)
-            {
-                throw;
-            }
+
+            return valueToReturn;
         }
 
         public static int SumPrixDetailReservation(int idReservation)
         {
-            try
+            int valueToReturn;
+            using (ExamenSGBDEntities oExamenSgbdEntities = new ExamenSGBDEntities())
             {
-                int valueToReturn = (Int32)oExamenSgbdEntities.SumPrixDetailReservation(idReservation).FirstOrDefault();
-                return valueToReturn;
+                valueToReturn =
+                    (Int32) oExamenSgbdEntities.SumPrixDetailReservation(idReservation).FirstOrDefault();
             }
-            catch (Exception e)
-            {
-                throw e;
-            }
+
+            return valueToReturn;
         }
 
         public static List<Menu> SelectMenu()
         {
-            try
+            List<Menu> valueToReturn;
+            using (ExamenSGBDEntities oExamenSgbdEntities = new ExamenSGBDEntities())
             {
-                var valueToReturn = oExamenSgbdEntities.Menus.ToList();
-                return valueToReturn;
+                valueToReturn = oExamenSgbdEntities.Menus.ToList();
             }
-            catch (Exception)
-            {
-                throw;
-            }
+
+            return valueToReturn;
         }
 
         public static List<DetailMenu> SelectDetailMenu()
         {
-            try
+            List<DetailMenu> valueToReturn;
+            using (ExamenSGBDEntities oExamenSgbdEntities = new ExamenSGBDEntities())
             {
-                var valueToReturn = oExamenSgbdEntities.DetailMenus.ToList();
-                return valueToReturn;
+                valueToReturn = oExamenSgbdEntities.DetailMenus.ToList();
             }
-            catch (Exception)
-            {
-                throw;
-            }
+
+            return valueToReturn;
         }
 
         public static void InsertDetailReservationMenu(int idReservation, string prenom, int entree, int plat, int dessert, int prix, int idMenu)
         {
-            try
+            using (ExamenSGBDEntities oExamenSgbdEntities = new ExamenSGBDEntities())
             {
-                oExamenSgbdEntities.InsertDetailReservationMenu(idReservation, prenom, entree, plat, dessert, prix, idMenu);
-            }
-            catch (SqlException sqlex)
-            {
-                switch (sqlex.Number)
-                {
-                    case 4060:
-                        throw new Exception(sqlex.Number + "Mauvaise DB");
-                        break;
-                    case 18456:
-                        throw new Exception(sqlex.Number + "Mauvais user");
-                        break;
-                    case 515:
-                        throw new Exception(sqlex.Number + " : Le prix ne peut être null");
-                        break;
-                    default:
-                        throw new Exception(sqlex.Number + " : " + sqlex.Message);
-                        break;
-                }
-            }
-            catch (Exception)
-            {
-                throw;
+                oExamenSgbdEntities.InsertDetailReservationMenu(idReservation, prenom, entree, plat, dessert, prix,
+                    idMenu);
             }
         }
 
         public static int SelectPrixGroupe(int idCarteRestaurant)
         {
-            try
+            int valueToReturn;
+            using (ExamenSGBDEntities oExamenSgbdEntities = new ExamenSGBDEntities())
             {
-                int valueToReturn = (Int32)oExamenSgbdEntities.SelectPrixGroupe(idCarteRestaurant).FirstOrDefault();
-                return valueToReturn;
+                valueToReturn =
+                    (Int32) oExamenSgbdEntities.SelectPrixGroupe(idCarteRestaurant).FirstOrDefault();
             }
-            catch (Exception e)
-            {
-                throw e;
-            }
+
+            return valueToReturn;
         }
     }
 }

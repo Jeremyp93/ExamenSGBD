@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -328,9 +329,27 @@ namespace BusinessLayer
 
                 return lstToReturn;
             }
-            catch (Exception e)
+            catch (SqlException sqlex)
             {
-                throw e;
+                switch (sqlex.Number)
+                {
+                    case 4060:
+                        throw new Exception(sqlex.Number + "Mauvaise DB");
+                        break;
+                    case 18456:
+                        throw new Exception(sqlex.Number + "Mauvais user");
+                        break;
+                    case 515:
+                        throw new Exception(sqlex.Number + " : Le prix ne peut être null");
+                        break;
+                    default:
+                        throw new Exception(sqlex.Number + " : " + sqlex.Message);
+                        break;
+                }
+            }
+            catch (Exception)
+            {
+                throw new Exception("Une erreur est survenue !");
             }
         }
 
@@ -341,9 +360,27 @@ namespace BusinessLayer
             {
                 DataLayerLinq.InsertReservation(numero, idTables, date, prenom, nom, nombre);
             }
+            catch (SqlException sqlex)
+            {
+                switch (sqlex.Number)
+                {
+                    case 4060:
+                        throw new Exception(sqlex.Number + "Mauvaise DB");
+                        break;
+                    case 18456:
+                        throw new Exception(sqlex.Number + "Mauvais user");
+                        break;
+                    case 515:
+                        throw new Exception(sqlex.Number + " : Le prix ne peut être null");
+                        break;
+                    default:
+                        throw new Exception(sqlex.Number + " : " + sqlex.Message);
+                        break;
+                }
+            }
             catch (Exception)
             {
-                throw;
+                throw new Exception("Une erreur est survenue !");
             }
         }
 
@@ -363,9 +400,27 @@ namespace BusinessLayer
 
                 return lstToReturn;
             }
+            catch (SqlException sqlex)
+            {
+                switch (sqlex.Number)
+                {
+                    case 4060:
+                        throw new Exception(sqlex.Number + "Mauvaise DB");
+                        break;
+                    case 18456:
+                        throw new Exception(sqlex.Number + "Mauvais user");
+                        break;
+                    case 515:
+                        throw new Exception(sqlex.Number + " : Le prix ne peut être null");
+                        break;
+                    default:
+                        throw new Exception(sqlex.Number + " : " + sqlex.Message);
+                        break;
+                }
+            }
             catch (Exception)
             {
-                throw;
+                throw new Exception("Une erreur est survenue !");
             }
         }
 
@@ -385,9 +440,27 @@ namespace BusinessLayer
 
                 return lstToReturn;
             }
+            catch (SqlException sqlex)
+            {
+                switch (sqlex.Number)
+                {
+                    case 4060:
+                        throw new Exception(sqlex.Number + "Mauvaise DB");
+                        break;
+                    case 18456:
+                        throw new Exception(sqlex.Number + "Mauvais user");
+                        break;
+                    case 515:
+                        throw new Exception(sqlex.Number + " : Le prix ne peut être null");
+                        break;
+                    default:
+                        throw new Exception(sqlex.Number + " : " + sqlex.Message);
+                        break;
+                }
+            }
             catch (Exception)
             {
-                throw;
+                throw new Exception("Une erreur est survenue !");
             }
         }
 
@@ -408,9 +481,27 @@ namespace BusinessLayer
 
                 return lstToReturn;
             }
+            catch (SqlException sqlex)
+            {
+                switch (sqlex.Number)
+                {
+                    case 4060:
+                        throw new Exception(sqlex.Number + "Mauvaise DB");
+                        break;
+                    case 18456:
+                        throw new Exception(sqlex.Number + "Mauvais user");
+                        break;
+                    case 515:
+                        throw new Exception(sqlex.Number + " : Le prix ne peut être null");
+                        break;
+                    default:
+                        throw new Exception(sqlex.Number + " : " + sqlex.Message);
+                        break;
+                }
+            }
             catch (Exception)
             {
-                throw;
+                throw new Exception("Une erreur est survenue !");
             }
         }
 
@@ -435,9 +526,27 @@ namespace BusinessLayer
 
                 return lstToReturn;
             }
+            catch (SqlException sqlex)
+            {
+                switch (sqlex.Number)
+                {
+                    case 4060:
+                        throw new Exception(sqlex.Number + "Mauvaise DB");
+                        break;
+                    case 18456:
+                        throw new Exception(sqlex.Number + "Mauvais user");
+                        break;
+                    case 515:
+                        throw new Exception(sqlex.Number + " : Le prix ne peut être null");
+                        break;
+                    default:
+                        throw new Exception(sqlex.Number + " : " + sqlex.Message);
+                        break;
+                }
+            }
             catch (Exception)
             {
-                throw;
+                throw new Exception("Une erreur est survenue !");
             }
         }
 
@@ -459,9 +568,27 @@ namespace BusinessLayer
 
                 return lstToReturn;
             }
+            catch (SqlException sqlex)
+            {
+                switch (sqlex.Number)
+                {
+                    case 4060:
+                        throw new Exception(sqlex.Number + "Mauvaise DB");
+                        break;
+                    case 18456:
+                        throw new Exception(sqlex.Number + "Mauvais user");
+                        break;
+                    case 515:
+                        throw new Exception(sqlex.Number + " : Le prix ne peut être null");
+                        break;
+                    default:
+                        throw new Exception(sqlex.Number + " : " + sqlex.Message);
+                        break;
+                }
+            }
             catch (Exception)
             {
-                throw;
+                throw new Exception("Une erreur est survenue !");
             }
         }
 
@@ -485,9 +612,27 @@ namespace BusinessLayer
 
                 return lstToReturn;
             }
+            catch (SqlException sqlex)
+            {
+                switch (sqlex.Number)
+                {
+                    case 4060:
+                        throw new Exception(sqlex.Number + "Mauvaise DB");
+                        break;
+                    case 18456:
+                        throw new Exception(sqlex.Number + "Mauvais user");
+                        break;
+                    case 515:
+                        throw new Exception(sqlex.Number + " : Le prix ne peut être null");
+                        break;
+                    default:
+                        throw new Exception(sqlex.Number + " : " + sqlex.Message);
+                        break;
+                }
+            }
             catch (Exception)
             {
-                throw;
+                throw new Exception("Une erreur est survenue !");
             }
         }
 
@@ -497,9 +642,27 @@ namespace BusinessLayer
             {
                 DataLayerLinq.UpdateReservation(idReservation, prixTotal);
             }
+            catch (SqlException sqlex)
+            {
+                switch (sqlex.Number)
+                {
+                    case 4060:
+                        throw new Exception(sqlex.Number + "Mauvaise DB");
+                        break;
+                    case 18456:
+                        throw new Exception(sqlex.Number + "Mauvais user");
+                        break;
+                    case 515:
+                        throw new Exception(sqlex.Number + " : Le prix ne peut être null");
+                        break;
+                    default:
+                        throw new Exception(sqlex.Number + " : " + sqlex.Message);
+                        break;
+                }
+            }
             catch (Exception)
             {
-                throw;
+                throw new Exception("Une erreur est survenue !");
             }
         }
 
@@ -509,9 +672,27 @@ namespace BusinessLayer
             {
                 DataLayerLinq.DeleteReservation(idReservation);
             }
+            catch (SqlException sqlex)
+            {
+                switch (sqlex.Number)
+                {
+                    case 4060:
+                        throw new Exception(sqlex.Number + "Mauvaise DB");
+                        break;
+                    case 18456:
+                        throw new Exception(sqlex.Number + "Mauvais user");
+                        break;
+                    case 515:
+                        throw new Exception(sqlex.Number + " : Le prix ne peut être null");
+                        break;
+                    default:
+                        throw new Exception(sqlex.Number + " : " + sqlex.Message);
+                        break;
+                }
+            }
             catch (Exception)
             {
-                throw;
+                throw new Exception("Une erreur est survenue !");
             }
         }
 
@@ -521,9 +702,27 @@ namespace BusinessLayer
             {
                 DataLayerLinq.InsertDetailReservation(idReservation, prenom, entree, plat, dessert, prix);
             }
+            catch (SqlException sqlex)
+            {
+                switch (sqlex.Number)
+                {
+                    case 4060:
+                        throw new Exception(sqlex.Number + "Mauvaise DB");
+                        break;
+                    case 18456:
+                        throw new Exception(sqlex.Number + "Mauvais user");
+                        break;
+                    case 515:
+                        throw new Exception(sqlex.Number + " : Le prix ne peut être null");
+                        break;
+                    default:
+                        throw new Exception(sqlex.Number + " : " + sqlex.Message);
+                        break;
+                }
+            }
             catch (Exception)
             {
-                throw;
+                throw new Exception("Le nom existe déjà !");
             }
         }
 
@@ -549,9 +748,27 @@ namespace BusinessLayer
 
                 return lstToReturn;
             }
+            catch (SqlException sqlex)
+            {
+                switch (sqlex.Number)
+                {
+                    case 4060:
+                        throw new Exception(sqlex.Number + "Mauvaise DB");
+                        break;
+                    case 18456:
+                        throw new Exception(sqlex.Number + "Mauvais user");
+                        break;
+                    case 515:
+                        throw new Exception(sqlex.Number + " : Le prix ne peut être null");
+                        break;
+                    default:
+                        throw new Exception(sqlex.Number + " : " + sqlex.Message);
+                        break;
+                }
+            }
             catch (Exception)
             {
-                throw;
+                throw new Exception("Une erreur est survenue !");
             }
         }
 
@@ -561,9 +778,27 @@ namespace BusinessLayer
             {
                 DataLayerLinq.UpdateDetailReservation(idReservation, prenom, entree, plat, dessert, prix);
             }
+            catch (SqlException sqlex)
+            {
+                switch (sqlex.Number)
+                {
+                    case 4060:
+                        throw new Exception(sqlex.Number + "Mauvaise DB");
+                        break;
+                    case 18456:
+                        throw new Exception(sqlex.Number + "Mauvais user");
+                        break;
+                    case 515:
+                        throw new Exception(sqlex.Number + " : Le prix ne peut être null");
+                        break;
+                    default:
+                        throw new Exception(sqlex.Number + " : " + sqlex.Message);
+                        break;
+                }
+            }
             catch (Exception)
             {
-                throw;
+                throw new Exception("Une erreur est survenue !");
             }
         }
 
@@ -573,9 +808,27 @@ namespace BusinessLayer
             {
                 DataLayerLinq.UpdateDetailReservationMenu(idReservation, prenom, entree, plat, dessert, prix, idMenu);
             }
+            catch (SqlException sqlex)
+            {
+                switch (sqlex.Number)
+                {
+                    case 4060:
+                        throw new Exception(sqlex.Number + "Mauvaise DB");
+                        break;
+                    case 18456:
+                        throw new Exception(sqlex.Number + "Mauvais user");
+                        break;
+                    case 515:
+                        throw new Exception(sqlex.Number + " : Le prix ne peut être null");
+                        break;
+                    default:
+                        throw new Exception(sqlex.Number + " : " + sqlex.Message);
+                        break;
+                }
+            }
             catch (Exception)
             {
-                throw;
+                throw new Exception("Une erreur est survenue !");
             }
         }
 
@@ -597,9 +850,27 @@ namespace BusinessLayer
 
                 return lstToReturn;
             }
+            catch (SqlException sqlex)
+            {
+                switch (sqlex.Number)
+                {
+                    case 4060:
+                        throw new Exception(sqlex.Number + "Mauvaise DB");
+                        break;
+                    case 18456:
+                        throw new Exception(sqlex.Number + "Mauvais user");
+                        break;
+                    case 515:
+                        throw new Exception(sqlex.Number + " : Le prix ne peut être null");
+                        break;
+                    default:
+                        throw new Exception(sqlex.Number + " : " + sqlex.Message);
+                        break;
+                }
+            }
             catch (Exception)
             {
-                throw;
+                throw new Exception("Une erreur est survenue !");
             }
         }
 
@@ -610,9 +881,27 @@ namespace BusinessLayer
                 int valueToReturn = DataLayerLinq.SumPrixDetailReservation(idReservation);
                 return valueToReturn;
             }
+            catch (SqlException sqlex)
+            {
+                switch (sqlex.Number)
+                {
+                    case 4060:
+                        throw new Exception(sqlex.Number + "Mauvaise DB");
+                        break;
+                    case 18456:
+                        throw new Exception(sqlex.Number + "Mauvais user");
+                        break;
+                    case 515:
+                        throw new Exception(sqlex.Number + " : Le prix ne peut être null");
+                        break;
+                    default:
+                        throw new Exception(sqlex.Number + " : " + sqlex.Message);
+                        break;
+                }
+            }
             catch (Exception)
             {
-                throw;
+                throw new Exception("Une erreur est survenue !");
             }
         }
 
@@ -623,9 +912,27 @@ namespace BusinessLayer
                 int? valueToReturn = DataLayerLinq.SelectIdMenu(idDetailReservation);
                 return valueToReturn;
             }
+            catch (SqlException sqlex)
+            {
+                switch (sqlex.Number)
+                {
+                    case 4060:
+                        throw new Exception(sqlex.Number + "Mauvaise DB");
+                        break;
+                    case 18456:
+                        throw new Exception(sqlex.Number + "Mauvais user");
+                        break;
+                    case 515:
+                        throw new Exception(sqlex.Number + " : Le prix ne peut être null");
+                        break;
+                    default:
+                        throw new Exception(sqlex.Number + " : " + sqlex.Message);
+                        break;
+                }
+            }
             catch (Exception)
             {
-                throw;
+                throw new Exception("Une erreur est survenue !");
             }
         }
 
@@ -645,9 +952,27 @@ namespace BusinessLayer
 
                 return lstToReturn;
             }
-            catch (Exception e)
+            catch (SqlException sqlex)
             {
-                throw e;
+                switch (sqlex.Number)
+                {
+                    case 4060:
+                        throw new Exception(sqlex.Number + "Mauvaise DB");
+                        break;
+                    case 18456:
+                        throw new Exception(sqlex.Number + "Mauvais user");
+                        break;
+                    case 515:
+                        throw new Exception(sqlex.Number + " : Le prix ne peut être null");
+                        break;
+                    default:
+                        throw new Exception(sqlex.Number + " : " + sqlex.Message);
+                        break;
+                }
+            }
+            catch (Exception)
+            {
+                throw new Exception("Une erreur est survenue !");
             }
         }
 
@@ -668,9 +993,27 @@ namespace BusinessLayer
 
                 return lstToReturn;
             }
-            catch (Exception e)
+            catch (SqlException sqlex)
             {
-                throw e;
+                switch (sqlex.Number)
+                {
+                    case 4060:
+                        throw new Exception(sqlex.Number + "Mauvaise DB");
+                        break;
+                    case 18456:
+                        throw new Exception(sqlex.Number + "Mauvais user");
+                        break;
+                    case 515:
+                        throw new Exception(sqlex.Number + " : Le prix ne peut être null");
+                        break;
+                    default:
+                        throw new Exception(sqlex.Number + " : " + sqlex.Message);
+                        break;
+                }
+            }
+            catch (Exception)
+            {
+                throw new Exception("Une erreur est survenue !");
             }
         }
 
@@ -680,9 +1023,27 @@ namespace BusinessLayer
             {
                 DataLayerLinq.InsertDetailReservationMenu(idReservation, prenom, entree, plat, dessert, prix, idMenu);
             }
+            catch (SqlException sqlex)
+            {
+                switch (sqlex.Number)
+                {
+                    case 4060:
+                        throw new Exception(sqlex.Number + "Mauvaise DB");
+                        break;
+                    case 18456:
+                        throw new Exception(sqlex.Number + "Mauvais user");
+                        break;
+                    case 515:
+                        throw new Exception(sqlex.Number + " : Le prix ne peut être null");
+                        break;
+                    default:
+                        throw new Exception(sqlex.Number + " : " + sqlex.Message);
+                        break;
+                }
+            }
             catch (Exception)
             {
-                throw;
+                throw new Exception("Une erreur est survenue !");
             }
         }
 
@@ -693,9 +1054,27 @@ namespace BusinessLayer
                 int valueToReturn = DataLayerLinq.SelectPrixGroupe(idCarteRestaurant);
                 return valueToReturn;
             }
+            catch (SqlException sqlex)
+            {
+                switch (sqlex.Number)
+                {
+                    case 4060:
+                        throw new Exception(sqlex.Number + "Mauvaise DB");
+                        break;
+                    case 18456:
+                        throw new Exception(sqlex.Number + "Mauvais user");
+                        break;
+                    case 515:
+                        throw new Exception(sqlex.Number + " : Le prix ne peut être null");
+                        break;
+                    default:
+                        throw new Exception(sqlex.Number + " : " + sqlex.Message);
+                        break;
+                }
+            }
             catch (Exception)
             {
-                throw;
+                throw new Exception("Une erreur est survenue !");
             }
         }
     }
